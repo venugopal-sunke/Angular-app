@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Angular Life Cycle Hooks</h4>
+            
+            <input placeholder="Input value....." type="text" [(ngModel)]="hookMsg"/>
+            <app-hookchild [hookData]="hookMsg">
+                <h1 #userHeadingh1>This is content projection hook component</h1>
+            </app-hookchild>
+
+            <h2 #heading2>This is heading2 text</h2>
+
+            <button type="button" (click)="increment()">Increment</button>
+            <p>Value:{{i}}</p>
+
+            <h4><b>ngOnChanges:</b></h4>
+            <p>ngOnChanges() will execute on every @Input() property change. If you want to 
+                execute any component method, based on the @Input() value change, then you should
+                write such logic inside ngOnChanges().
+            </p>
+
+            <h4><b>ngOnInit:</b></h4>
+            <p>ngOnInit is called only once when the component is initialized.</p>
+            <br>
+
+            <h4><b>ngDoCheck</b></h4>
+            <p>ngDoCheck() is called whenever change detection is run. Angular tracks binding 
+               inputs by object reference. </p>
+
+            <h4><b>ngAfterContentInit</b></h4>
+            <p> It will run only once when the projected content is initialized.</p>
+
+            <h4><b>ngAfterContentChecked</b></h4>
+            <p>ngAfterContentChecked it can be called in both parent and child components as well.
+              ngAfterContentChecked is called every time when ever there is a change in the parent 
+              component.
+            </p>
+
+            <h4><b>ngAfterViewInit</b></h4>
+            <p></p>
+
+            <h4><b>ngAfterViewChecked</b></h4>
+            <p></p>
+
+            <h4><b>ngOnDestroy</b></h4>
+            <p>Mostly it is used to unsubscribe from things like services. Called only once
+                just before component is removed from the DOM.
+            </p>
+        </div>
+    </div>
+</div>

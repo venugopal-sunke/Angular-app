@@ -1,0 +1,17 @@
+<h4><b>{{parentInfo}}</b></h4>
+<button type="button" (click)="sendData()">Send Data from child to parent</button><br>
+<br><br>
+<h1>Change detection in angular implementation.</h1>
+<h2>detectChanges</h2>
+<h2>{{ message }}</h2>
+<button (click)="updateMessage()">Update Message</button>
+<br><br>
+<strong>Example: setTimeout, Promise.then(), HttpClient. No detectChanges() needed.</strong>
+<br><br>
+<strong>Example: third-party libraries, NgZone.runOutsideAngular(), direct DOM events.
+    You must call ChangeDetectorRef.detectChanges() to update the view.</strong>
+
+<h2>markForCheck</h2>
+<p>Counter: {{ counterMark }}</p>
+<button (click)="incrementMark()">Increment with markForCheck()</button>
+<br><br>

@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <h4>Events Handling in Angular.</h4>
+
+      <mat-checkbox>click</mat-checkbox><br>
+      <button type="button" id="demo" class="btn btn-primary" (click)="clickEvent($event,12)">Click Button</button>
+      <p>{{clickData}}</p><br>
+
+      <button type="button" class="btn btn-primary" (dblclick)="doubleClick()">Double click button</button>
+      <p>{{doubleclickdata}}</p><br>
+
+      <button type="button" class="increment btn btn-primary" (click)="increment()">Increment</button>
+      <button type="button" class="btn btn-primary" (click)="decrement()">Decrement</button>
+      <p>Event to display the no of times the button was clicked: {{ count }}</p><br>
+
+      <button type="button" (click)="myFunction()">CountBtn</button>
+      <p>{{countVal}}</p>
+
+      <h3>Implemented ng-container and ng-template</h3>
+      <ng-container *ngIf="menuItem.template">
+        <ng-container *ngTemplateOutlet="menuItem.template"></ng-container>
+      </ng-container>
+
+      <h2>Converting Celsius to Farenheit and vice versa</h2>
+      <section>
+        <label>Celsius:</label>
+        <input
+          type="number"
+          [(ngModel)]="ctemperature"
+          #boxC
+          (input)="onKey(boxC.value, 'celsius')"
+        />
+      </section>
+      
+      <section>
+        <label>Farenheit:</label>
+        <input
+          type="number"
+          #boxF
+          [(ngModel)]="ftemperature"
+          (input)="onKey(boxF.value, 'farenheit')"
+        />
+      </section>
+
+    </div>
+  </div>
+</div>

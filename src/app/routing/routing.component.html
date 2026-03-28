@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Routing Concepts in Angular</h4>
+ 
+            <h3>Implemented ngOnDestroy and unsubscribe method</h3>
+            <table class="table table-bordered table-responsive table-striped">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>User Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let info of usersData" [ngClass]="getCSSClasses(info)">
+                        <!-- <td matTooltip="{{info.id}}" [matTooltipPosition]="'before'"><a
+                                [routerLink]="['/userinfo',info.id]">{{ info.id }}</a></td> -->
+                        <td matTooltip="{{info.id}}" [matTooltipPosition]="'before'"><a
+                                    (click)="userRoute(info)">{{ info.id }}</a></td>
+                        <td matTooltip="{{info.name}}" [matTooltipPosition]="'above'">{{ info.name }}</td>
+                        <td matTooltip="{{info.username}}" [matTooltipPosition]="'below'">{{ info.username }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,137 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Looping an array of objects</h4>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Place</th>
+                        <th>Experience</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detail of details; let i = index">
+                        <td>{{i}}</td>
+                        <td>{{detail.name}}</td>
+                        <td>{{detail.designation}}</td>
+                        <td>{{detail.place}}</td>
+                        <td>{{detail.experience}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div>
+                <ul *ngFor="let product of products">
+                    <li *ngFor="let tech of product.tech">{{tech.name}}:: {{tech.profession}}</li>
+                </ul>
+            </div>
+
+            <mat-card>
+                <mat-card-content fxLayout="column">
+                    <form role="form" [formGroup]="addUserForm" novalidate>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>User Name</mat-label>
+                            <input type="text" required matInput placeholder="user name" formControlName="username" />
+                            <mat-icon matSuffix>person</mat-icon>
+                        </mat-form-field>
+
+                        <div class="spacing"></div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Designation</mat-label>
+                            <input type="text" required matInput placeholder="Designation"
+                                formControlName="designation" />
+                            <mat-icon matSuffix>description</mat-icon>
+                        </mat-form-field>
+                        <div class="spacing"></div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Skills</mat-label>
+                            <input type="text" required matInput placeholder="Skills" formControlName="skills" />
+                            <mat-icon matSuffix>stars</mat-icon>
+                        </mat-form-field>
+                        <div class="spacing"></div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Place</mat-label>
+                            <input type="text" required matInput placeholder="Place" formControlName="place" />
+                            <mat-icon matSuffix>stars</mat-icon>
+                        </mat-form-field>
+                        <div class="spacing"></div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Experience</mat-label>
+                            <input type="text" required matInput placeholder="Experience"
+                                formControlName="experience" />
+                            <mat-icon matSuffix>stars</mat-icon>
+                        </mat-form-field><br>
+                        <button type="button" mat-raised-button (click)="addUser()">Add User</button>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+
+            <ul>
+                <li *ngFor="let user of userData">
+                    <span>{{user.username}}::</span> <span>{{user.designation}}::</span> <span>{{user.place}}::</span>
+                    <span>{{user.experience}}</span>
+                </li>
+            </ul>
+
+            <p><b>Cascading Dropdown</b></p>
+
+            <select aria-label="country" #mySelect (change)="selectVal(mySelect.value)">
+                <option>Select Country</option>
+                <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+            </select>
+            <br><br>
+            <!-- <div *ngIf="countryId > 0"> -->
+
+            <select aria-label="city">
+                <option>Please Select City</option>
+                <option *ngFor="let city of cityNames">{{city}}</option>
+            </select>
+            <!-- </div> -->
+            <br><br>
+            <br><br>
+
+            <h3>To make the default value as selected from ts file</h3>
+            <select aria-label="label for the select" name="cars" id="cars" [(ngModel)]="selectedCar">
+                <option>Please Select</option>
+                <option *ngFor="let car of cars" [value]="car.id">{{car.name}}</option>
+            </select>
+            <br>
+            <h3>Selected Car Id:{{selectedCar}}</h3>
+            <br>
+
+            <ul>
+                <li [matTooltip]="user.age > 21 ? red : user.age == 20 ? green : yellow"
+                    [ngClass]="{user1: user.age > 21, user2: user.age == 20, user3: user.age == 21}"
+                    *ngFor="let user of users; let i=index;">{{user.id}}::{{user.name}}::{{user.age}}
+                    <button type="button" (click)="deleteRow(i)">Delete</button>
+                </li>
+            </ul>
+
+            <p><b>Looping object</b></p>
+            <div *ngFor="let item of myObject | keyvalue">
+                Key: <b>{{item.key}}</b>::::::Value: <b>{{item.value}}</b>
+            </div>
+            <br><br>
+            <p>When we ever want to use same data in different places of the same component. 
+                we can use below approach to handle data redundancy. To improve code quality
+            </p>
+            <div *ngIf="isCertsToggle">
+              <div *ngFor="let user of users1">
+                  <ng-container *ngTemplateOutlet="variantProperties; context:{value:user}"></ng-container>
+              </div>
+            </div>
+            
+        </div>
+
+        <ng-template #variantProperties let-ele="value">
+              <span>{{ele.id}}</span>
+              <span *ngIf="testMyFun(ele.id)">Testing data</span>
+        </ng-template>
+    </div>
+</div>

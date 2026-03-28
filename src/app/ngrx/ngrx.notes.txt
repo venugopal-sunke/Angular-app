@@ -1,0 +1,58 @@
+NGRX is a library based on redux pattern.
+ State Management for the whole application.
+ State: Data (or) Information.
+
+ Store:
+ Reducer:
+ Dispatch:
+ Action:
+ Effects:
+ Selector:
+ 
+NgRx is a state management library for Angular.
+
+Store: Store contains application data, which is updated through actions and reducers.
+
+Action: An action is an object dispatched to the Store using the dispatch() method. It contains a type and optional payload.
+
+Dispatch: Dispatch takes an action as an argument.We pass information inside the action (payload / properties)
+          Dispatch is usually called at the component level. The dispatched action is passed to the reducer function.
+		  
+Reducer: A reducer is a pure function that takes the previous state and an action as arguments, and returns a new state. 
+         It does not modify the state directly. Reducers are called by NgRx automatically when an action is dispatched.
+		 
+Effects: Effects listen for actions and handle side effects like API calls or logging. They are used for asynchronous operations. 
+         After completing their work, Effects can dispatch new actions, which are then processed by reducers to update the store.
+		 
+Selector: A selector is a pure function that retrieves a specific slice of data from the Store. Components use selectors to 
+          read state reactively.
+
+ Check in  appmodule.ts:
+ -----------------------
+ StoreModule.forRoot({user: userReducer}) // Whole application ({user: userReducer}) takes reducer function 
+ StoreModule.forFeature() // Lazy load module
+ 
+ import {Store} from '@ngrx/store'; // in app component
+ 
+ constructor(private store: Store)
+ 
+ store.subscribe() // select the complete store
+ store.select('user').subscribe()// retrieve data from the store, user is a key value of reducer function({user: userReducer})
+ 
+ editMobile(){
+   this.store.dispatch(updateEmail(input.value))
+ }
+ 
+ createAction, props is a function
+ 
+ export updateEmail = createAction('name=edit',props<name: string>())
+ 
+ createReducer(initialState, on(updateEmail,(state,data)=> ({...state,name: data.name})))
+
+ We cannot directly modify the data in the store.
+We will create a function and modify the data in the store.
+
+Each state is a slice.
+On each slice we apply reducer function
+
+actionCreater is a function we have to create

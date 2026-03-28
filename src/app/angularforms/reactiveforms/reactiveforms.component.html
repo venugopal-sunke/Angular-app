@@ -1,0 +1,91 @@
+<h4>This is angular reactive form</h4>
+<form role="form" [formGroup]="studentRegisterForm" (submit)="studentForm()">
+    <div>
+        <label>First Name:</label>
+        <input type="text" formControlName="firstName" placeholder="Enter your First Name" />
+        <div>
+            <span class="mat-error"
+              *ngIf="studentRegisterForm?.controls?.['firstName']?.errors?.['required'] && studentRegisterForm?.controls?.['firstName']?.touched">
+              First Name is required.
+            </span>
+            <span class="mat-error"
+              *ngIf="studentRegisterForm.controls?.['firstName']?.errors?.['pattern'] && studentRegisterForm?.controls?.['firstName']?.touched">
+              First Name should not contain spaces
+            </span>
+          </div>
+      </div>
+
+      <div>
+        <label>Last Name:</label>
+        <input type="text" formControlName="lastName" placeholder="Enter your Last Name" />
+        <div>
+            <span class="mat-error"
+              *ngIf="studentRegisterForm?.controls?.['lastName']?.errors?.['required'] && studentRegisterForm?.controls?.['lastName']?.touched">
+              Last Name is required.
+            </span>
+            <span class="mat-error"
+              *ngIf="studentRegisterForm.controls?.['lastName']?.errors?.['pattern'] && studentRegisterForm?.controls?.['lastName']?.touched">
+              Last Name should not contain spaces
+            </span>
+          </div>
+    </div>
+
+    <div>
+        <label>Email:</label>
+       <input placeholder="email" type="text" formControlName="email" />
+       <div>
+        <span class="mat-error"
+          *ngIf="studentRegisterForm?.controls?.['email']?.errors?.['required'] && studentRegisterForm?.controls?.['email']?.touched">
+          Email Name is required.
+        </span>
+        <span class="mat-error"
+          *ngIf="studentRegisterForm.controls?.['email']?.errors?.['pattern'] && studentRegisterForm?.controls?.['email']?.touched">
+          Email Name should not contain spaces
+        </span>
+      </div>
+    </div>
+
+    <div>
+        <label>Mobile Number:</label>
+        <input placeholder="mobileNum" type="text" formControlName="mobileNum">
+        <div>
+            <span class="mat-error"
+              *ngIf="studentRegisterForm?.controls?.['mobileNum']?.errors?.['required'] && studentRegisterForm?.controls?.['mobileNum']?.touched">
+              Mobile Number is required.
+            </span>
+            <span class="mat-error"
+              *ngIf="studentRegisterForm.controls?.['mobileNum']?.errors?.['pattern'] && studentRegisterForm?.controls?.['mobileNum']?.touched">
+              Mobile Number should contain 10 digits.
+            </span>
+          </div>
+    </div>
+   
+    <button type="submit" [disabled]="studentRegisterForm.invalid">Submit</button>
+    <button type="button" (click)="resetform()">Reset Form</button>
+
+</form>
+
+<br>
+<h2>Dynamic Form controls.</h2>
+<form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+ <div formArrayName="employees">
+  <div *ngFor="let employee of employeesaa.controls; let empIndex=index;">
+   <div [formGroupName]="empIndex" >
+    {{empIndex}} First Name: <input placeholder="firstName" type="text"  formControlName="firstName"/>
+    LastName: <input placeholder="lastName" type="text" formControlName="lastName"/>
+    <button type="button" (click)="removeEmployee(empIndex)">Remove</button>
+    <div formArrayName="skills">
+      <div *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index">
+        <div [formGroupName]="skillIndex" >
+         {{skillIndex}} skill: <input type="text" placeholder="skill" formControlName="skill">
+         experience: <input type="text" placeholder="experience" formControlName="experience">
+         <button type="button" (click)="removeSkill(empIndex,skillIndex)">Remove Skill</button>
+      </div>
+    </div>
+      <button type="button" (click)="addSkill(empIndex)">Add Skill</button>
+    </div>
+   </div>
+  </div>
+  <button type="button" (click)="addEmployee()">Add</button>
+ </div>
+</form>

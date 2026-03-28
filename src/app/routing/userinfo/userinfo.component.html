@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Displaying user Information</h4>
+            <ul>
+                <li>
+                    <span><b>Id:</b></span>
+                    <span>{{userData?.id}}</span>
+                </li>
+                <li>
+                    <span><b>Name:</b></span>
+                    <span>{{userData?.name}}</span>
+                </li>
+                <li>
+                    <span><b>Username:</b></span>
+                    <span>{{userData?.username}}</span>
+                </li>
+                <li>
+                    <span><b>Email:</b></span>
+                    <span>{{userData?.email}}</span>
+                </li>
+                <li>
+                    <span><b>Street:</b></span>
+                    <span>{{userData?.address?.street}}</span>
+                </li>
+                <li>
+                    <span><b>Suite:</b></span>
+                    <span>{{userData?.address?.suite}}</span>
+                </li>
+                <li>
+                    <span><b>City:</b></span>
+                    <span>{{userData?.address?.city}}</span>
+                </li>
+                <li>
+                    <span><b>Zipcode:</b></span>
+                    <span>{{userData?.address?.zipcode}}</span>
+                </li>
+                <li>
+                    <span><b>Latitude:</b></span>
+                    <span>{{userData?.address?.geo?.lat}}</span>
+                </li>
+                <li>
+                    <span><b>Longitude:</b></span>
+                    <span>{{userData?.address?.geo?.lng}}</span>
+                </li>
+                <li>
+                    <span><b>Phone:</b></span>
+                    <span>{{userData?.phone}}</span>
+                </li>
+                <li>
+                    <span><b>Website:</b></span>
+                    <span>{{userData?.website}}</span>
+                </li>
+                <li>
+                    <span><b>Company Name:</b></span>
+                    <span>{{userData?.company?.name}}</span>
+                </li> 
+                <li>
+                    <span><b>Company Catch Phrase:</b></span>
+                    <span>{{userData?.company?.catchPhrase}}</span>
+                </li>
+                <li>
+                    <span><b>Company Bs:</b></span>
+                    <span>{{userData?.company?.bs}}</span>
+                </li>
+            </ul>
+
+            <ul class="nav nav-pills nav-justified navbar_pills">
+                <li routerLinkActive="active">
+                    <a routerLink="address">Address</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="company">Company</a>
+                </li>
+            </ul>
+
+            <router-outlet></router-outlet>
+
+            <button type="button" (click)="moveBack()">Back</button>
+
+        </div>
+    </div>
+</div>

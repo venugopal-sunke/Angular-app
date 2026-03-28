@@ -1,0 +1,1 @@
+export const SPINNERMESSAGE = {message: 'Working on your request'};

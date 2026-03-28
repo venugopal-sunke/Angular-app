@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Dependency Providers</h4>
+            <p><strong>useClass:</strong>is a way to provide a dependency using a specific class when configuring dependency injection.</p>
+
+            <p><strong>Example for use Class Dependency</strong></p>
+            <div>
+                <button type="button" (click)="increment();">Increment</button>
+                <button type="button" (click)="decrement();">Decrement</button><br>
+                <p>Counter Value: {{countVal}}</p>
+            </div>
+
+            <p><strong>useValue:</strong>provides a static value that can be used as a dependency.(useful for global settings in the project)</p>
+
+            <p><strong>useFactory:</strong>allows you to define a function that constructs a dependency.</p>
+
+            <p><strong>Example for use Factory Dependency</strong></p>
+            <div>
+                <button type="button" (click)="plus();">Add Increment</button>
+                <button type="button" (click)="minus();">Sub Decrement</button><br>
+                <p>Updated Value: {{updatedVal}}</p>
+            </div>
+
+            <p><strong>useExisting:</strong>indicate that a new token should be mapped to the existing token.</p>
+              <app-logstatus></app-logstatus>
+        </div>
+    </div>
+</div>

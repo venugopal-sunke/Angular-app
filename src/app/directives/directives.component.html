@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <h4>Directives in Angular</h4>
+
+      <p *ngIf="condition">Condition is true and ngIf is true</p>
+      <p *ngIf="!condition">Condition is false and ngIf is false</p><br>
+      
+      <button type="button" class="btn btn-primary" (click)="show = !show">Toggle Button</button>
+      <p>{{show}}</p>
+      <p *ngIf="show">Text is showing. I am DIV 1</p>
+      <p *ngIf="!show">Text is hiding. I am DIV 2</p>
+
+      <mat-card class="result">
+        <mat-card-content>
+          <section class="example-section">
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+              (change)="changed($event)">
+            </mat-slide-toggle>
+            <p [ngClass]="displayMessage">Toggle Text</p>
+          </section>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="mytogglesec">
+        <div class="mytoggle">
+          <section class="example-section">
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+              (change)="mytoggle($event)">
+            </mat-slide-toggle>
+            <p class="showme">Toggle Text</p>
+          </section>
+        </div>
+
+        <div class="mytoggle">
+          <section class="example-section">
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+              (change)="mytoggle($event)">
+            </mat-slide-toggle>
+            <p class="showme">Toggle Text</p>
+          </section>
+        </div>
+
+        <p>Example of toggle action</p>
+        <button type="button" (click)="toggleAction()">Button</button>
+        <p>This is some toggle action: <span [ngClass]="showMsg">Hi Hello welcome</span></p>
+
+        <div *ngIf="isUserLoggedin; else logout">
+          <h3>Welcome to User Profile</h3>
+        </div>
+
+        <ng-template #logout>
+          <h3>The user is not logged in</h3>
+        </ng-template>
+
+        <p appHighlight>This is a custom directive</p>
+        <h1 appMouseevent>My Custom directive using host listener</h1>
+      </div>
+
+      <p>Displaying in table format</p>
+      <table class="table table-bordered table-responsive">
+        <thead>
+          <tr class="bg-primary">
+            <th>Index</th>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>Style</th>
+            <th>Technology</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor="let data of details; let i=index;" (click)="setActive($event,i)"
+            [class.bgColor]="selectedIndex === i">
+            <td>{{i+1}}</td>
+            <td matTooltip="{{data.name}}" [matTooltipPosition]="'before'">{{data.name}}</td>
+            <td>{{data.designation}}</td>
+            <td *ngFor="let dataa of data.tech">{{dataa.technology}}</td>
+            <td *ngFor="let dataa of data.tech">{{dataa.style}}</td>
+            <td *ngFor="let dataa of data.tech">{{dataa.role}}</td>
+          </tr> -->
+
+          <tr *ngFor="let detail of details; let i=index;" (click)="setActive($event,i)"
+          [class.bgColor]="selectedIndex === i">
+            <td>{{i+1}}</td>
+            <td matTooltip="{{detail.name}}" [matTooltipPosition]="'before'">{{ detail.name }}</td>
+            <td>{{ detail.designation }}</td>
+            <!-- Loop through the tech array and create rows for each technology -->
+            <ng-container *ngFor="let tech of detail.tech">
+                <td>{{ tech.technology }}</td>
+                <td>{{ tech.style }}</td>
+                <td>{{ tech.role }}</td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Switch Directive</h3>
+
+      <div [ngSwitch]="selectedCountry">
+        <div *ngSwitchCase="'India'" class="jumbotron">
+          <h1>Selected country is India</h1>
+        </div>
+        <div *ngSwitchCase="'US'" class="jumbotron">
+          <h1>Selected country is United States</h1>
+        </div>
+        <div *ngSwitchDefault class="jumbotron">
+          <h1>Selected country is United Kingdom</h1>
+        </div>
+      </div>
+
+      <h3>Applying ngStyle for div's</h3>
+
+      <div [ngStyle]="{'background-color':'green', 'color': '#fff', 'padding': '10px'}">This is green div</div>
+
+      <div [ngStyle]="{'background-color': bgColor}">This is getting background color from component.ts file</div>
+
+      <div [style]='{"margin-bottom": "20px"}' [ngStyle]="{'color': txtColor === false ? 'green' : 'red'}">This is
+        conditional ngStyle</div>
+      <h2 [style]="{'color': h2Color}">This is heading h2</h2>
+      <h3 [style.color]="h3Color">This is heading 3</h3>
+      <p [style]="myStyle">This is paragraph tag</p>
+      <h3 [style.color]="hasError ? 'red' : 'green'"><b>This is heading h3</b></h3>
+
+      <div appCardhover>
+        <div [style]="{'font-weight': 'bold', 'font-size': '20px', 'padding': '15px' }">
+          What did the cheese say when it looked in the mirror?
+        </div>
+        <p [ngStyle]="{'display':'none'}" class="card-text">Hello-me (Halloumi)</p>
+      </div>
+
+      <div appCardhover>
+        <div [style]="{'font-weight': 'bold', 'font-size': '20px', 'padding': '15px' }">
+          What kind of cheese do you use to disguise a small horse?
+        </div>
+        <p [ngStyle]="{'display':'none'}" class="card-text">Mask-a-pony (Mascarpone)</p>
+      </div>
+
+      <div appCardhover>
+        <div [style]="{'font-weight': 'bold', 'font-size': '20px', 'padding': '15px' }">
+          A kid threw a lump of cheddar at me
+        </div>
+        <p [ngStyle]="{'display':'none'}" class="card-text">I thought that is not very mature</p>
+      </div>
+
+      <h1>Receiving data from events.component.ts{{testVal}}</h1>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<!-- <div (click)="toggleContent($event, title)">
+    <h4>{{ title.name }}</h4>
+    <div class="mycontent" id="{{ title.id }}" style="display: none">
+      <ng-content></ng-content>
+    </div>
+</div> -->
+
+<div (click)="toggleContent()">
+    <h4>{{ title.name }}</h4>
+    <div class="mycontent" id="{{ title.id }}">
+      <ng-content *ngIf="visible"></ng-content>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Pipes in Angular</h4>
+
+            <p>{{ pipeTitle | titlecase}}</p>
+            <p>Percent Pipe: {{ rate | percent}}</p>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="bg-primary">
+                        <th>Index</th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Salary</th>
+                        <th>Date of Birth</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users; let i = index;">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name | uppercase }}</td>
+                        <td>{{ user.city | titlecase }}</td>
+                        <td>{{ user.salary | currency: 'INR': 'symbol': '3.3-3'}}</td>
+                        <td>{{ user.dob | date: 'dd/MM/YYYY'}}</td>
+                        <td>{{ user.dob | age }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Sorting an array using custom pipe: {{ numArray | arraysort : 'descending' }}</p>
+
+            <ul>
+                <li><b>Ascending order</b></li>
+                <li *ngFor="let num of numArray | arraysort : 'ascending' ">{{num}}</li>
+            </ul>
+
+            <pre>{{users | json}}</pre>
+
+            <h3>Async pipe in Angular</h3>
+            <ul class="user">
+                <li *ngFor="let user of (usersData$ | async)">
+                    {{user?.id}}:::
+                    {{user?.name}}
+                </li>
+            </ul>
+            <p><b>when using async pipe, no need to use subscribe method in services when making 
+                an API request.</b></p>
+
+             <p>{{appStatus | async}}</p>
+        </div>
+    </div>
+</div>

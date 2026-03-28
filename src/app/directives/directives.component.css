@@ -1,0 +1,25 @@
+.card-outline-primary {
+    border: 2px solid red;
+    padding: 15px;
+  }
+  .mouseEventStyling {
+    border: 15px solid violet;
+  }
+  .showme {
+    visibility: visible;
+  }
+  .hideme {
+    visibility: hidden;
+  }
+  .bgColor {
+    background-color: red;
+    color: #fff;
+  }
+.displayMessage {
+  display: inline-block; 
+  margin-left: 15px;
+}
+.showme {
+  display: inline-block; 
+  margin-left: 15px;
+}

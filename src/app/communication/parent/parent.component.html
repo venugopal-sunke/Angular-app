@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h4>Communication between the components</h4>
+
+          <p>Communication from parent to child component</p>
+          <h3>{{childCommunication.someProperty}}</h3>
+          <app-child #childCommunication [parentInfo]="parentMsg"  (childData)="childMsg($event)"></app-child>
+           <button type="button" (click)="childCommunication.logFoo()">Click </button>
+          <p>Communication from child to parent</p>
+          <h5>{{info}}</h5>
+          <h1 [innerHtml]="childVal"></h1>
+        </div>
+    </div>
+
+    <h2>Implemented ng-content from parent to child communication</h2>
+    <div class="row" *ngFor="let session of contentData">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        
+        <div class="well hoverwell thumbnail">
+          <app-childone [title]="session">
+            <span>Duration: {{ session.date }}</span><br>
+            <span>Level: {{ session.time }}</span>
+          </app-childone>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div>
+          <button type="button" [class.stateActive]="selectedIndex === 'all'" (click)="myFunc($event,'all')">All</button>
+          <button type="button" [class.stateActive]="selectedIndex === 'advanced'" (click)="myFunc($event,'advanced')">Advanced</button>
+          <button type="button" [class.stateActive]="selectedIndex === 'intermediate'" (click)="myFunc($event,'intermediate')">Intermediate</button>
+          <button type="button" [class.stateActive]="selectedIndex === 'beginner'" (click)="myFunc($event,'beginner')">Beginner</button>
+        </div>
+
+        <div *ngIf="myData.length > 0">
+          <ul *ngFor="let data of myData">
+            <!-- <li>{{data?.id}}</li>
+            <li>{{data?.name}}</li>
+            <li>{{data?.presenter}}</li> -->
+            <li><b>{{data?.level}}</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+</div>

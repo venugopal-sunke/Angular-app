@@ -1,0 +1,13 @@
+.spacing{
+    margin-right: 10px;
+    display: inline-block;
+}
+.user1 {
+    background-color: red;
+}
+.user2 {
+    background-color: green;
+}
+.user3 {
+    background-color: yellow;
+}

@@ -1,0 +1,52 @@
+<button type="button" class="close" mat-button mat-dialog-close><img src="assets/images/fi_x.png" alt="close" /> </button>
+<mat-divider></mat-divider>
+<ul [@enterAnimation]>
+    <li>
+        <span>Id:</span><span>{{userDetails?.id}}</span>
+    </li>
+    <li>
+        <span>Name:</span><span>{{userDetails?.name}}</span>
+    </li>
+    <li>
+        <span>User Name:</span><span>{{userDetails?.username}}</span>
+    </li>
+    <li>
+        <span>Email:</span><span>{{userDetails?.email}}</span>
+    </li>
+    <li>
+        <span>Street:</span><span>{{userDetails?.address?.street}}</span>
+    </li>
+    <li>
+        <span>Suite:</span><span>{{userDetails?.address?.suite}}</span>
+    </li>
+    <li>
+        <span>City</span><span>{{userDetails?.address?.city}}</span>
+    </li>
+    <li>
+        <span>Zipcode:</span><span>{{userDetails?.address?.zipcode}}</span>
+    </li>
+    <li>
+        <span>Latitude</span><span>{{userDetails?.address?.geo?.lat}}</span>
+    </li>
+    <li>
+        <span>Longitude</span><span>{{userDetails?.address?.geo?.lng}}</span>
+    </li>
+    <li>
+        <span>Phone</span><span>{{userDetails?.phone}}</span>
+    </li>
+    <li>
+        <span>Website</span><span>{{userDetails?.website}}</span>
+    </li>
+    <li>
+        <span>Conpany Name:</span><span>{{userDetails?.company?.name}}</span>
+    </li>
+    <li>
+        <span>Catch Phrase:</span><span>{{userDetails?.company?.catchPhrase}}</span>
+    </li>
+    <li>
+        <span>BS:</span><span>{{userDetails?.company?.bs}}</span>
+    </li>
+</ul>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>

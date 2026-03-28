@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Data Binding in Angular.</h4>
+
+            <h5>Interpolation is one way data binding</h5>
+            <p>{{ interpolationTitle }}</p><br>
+
+            <p>Setting image path using interpolation</p>
+            <img alt="Image not found" src= {{imageUrl}}  class="image"  />
+            <button type="button" disabled="{{ btnStatus }}">Click</button><br>
+
+            <p>Setting image path using property binding. It works for non string expression</p>
+            <img alt="Image not found" [src]='imageUrl' class="image" />
+            <button type="button" [disabled]="btnStatus">Click</button>
+            <br />
+
+            <h4>Event binding in angular</h4>
+  	        <button type="button" (click)="changeTitle()">Event Bind</button>
+            <p>This is: {{ changeText }}</p><br>
+
+            <h2>Two way data binding</h2>
+            <input type="text" placeholder="Please enter some input text..." [(ngModel)]="username">
+  	        <p>{{username}}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Rxjs Operators</h4>
+
+            <p>map operator: It will work similar to javascript map operator. It works on 
+               observable</p>
+
+            <p>filter operator: It will work similar to javascript filter operator. It works on 
+               observable
+            </p>
+
+            <p>of operator: It will make an observable from a string, array or object.</p>
+            <button type="button" (click)="onRoleChange()">Find RoleName</button>
+
+            <p>Take operator: It will emit first count values emitted by the source observable</p>
+            <form role="form" [formGroup]="testForm">
+                <input placeholder="Please enter...." type="text" formControlName="testdata" />
+            </form>
+
+            <p>From operator: It will create an observable from an array, an array-like object. 
+                It will always take Array or Array like. It should be iterable. It will not accept
+                single argument like number. <br>
+                Ex: students2: observable=from(['one','two','three','four'])
+            </p>
+
+            <p>From event operator: It creates an observable that emits events of a specific type coming from the given target</p>
+
+            <p>Interval operator: It creates an observable that emits sequential numbers every specified
+                interval of time,
+            </p>
+
+            <p>First Operator: It will give the first value emitted by the source observable</p>
+
+            <p>Pluck Operator : It is deprecated in this angular version</p>
+            <ul>
+                <li *ngFor="let city of pluckObs">{{city}}</li>
+            </ul>
+
+            <p>Distinct operator will give all the values that are distinct when compared
+                with the previous value.
+            </p>
+        </div>
+    </div>
+</div>

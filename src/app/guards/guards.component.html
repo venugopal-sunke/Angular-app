@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Guards in Angular</h4>
+
+            <ul>
+                <li>
+                    <strong>CanActivate:</strong> 
+                    Checks to see if a user can visit a route. Implemented CanActivate guard in app-routing.module.ts</li>
+                <li><strong>CanActivateChild:</strong> 
+                    Checks to see if a user can visit a routes children. 
+                    Implemented CanActivateChild guard in app-routing.module.ts
+                </li>
+                <li><strong>CanDeactivate:</strong> 
+                    Checks to see if a user can exit a route.
+                    Implemented CanDeactivate guard in app-routing.module.ts
+                </li>
+                <li><strong>Resolve:</strong> 
+                    Performs route data retrieval before route activation.
+                    Implemented Resolve guard in app-routing.module.ts
+                </li>
+                <li><strong>CanLoad:</strong> Checks to see if a user can route to a module that is lazy loaded.</li>
+            </ul>
+
+            <ul class="nav nav-pills nav-justified navbar_pills">
+                <li routerLinkActive="active">
+                    <a routerLink="address">Address</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="company">Company</a>
+                </li>
+            </ul>
+
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

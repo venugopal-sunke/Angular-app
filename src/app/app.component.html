@@ -1,0 +1,25 @@
+<h1>{{projectTitle}}</h1>
+
+<div class="container">
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <ul class="nav nav-pills nav-justified navbar_pills">
+      <!-- <li><a routerLink="/">Events</a></li>
+      <li><a routerLink="directives">Directives</a></li>
+      <li><a routerLink="repeatloop">Repeat Loop</a></li>
+      <li><a routerLink="binding">Data Binding</a></li>
+      <li><a routerLink="pipes">Pipes</a></li>
+      <li><a routerLink="rxjsoperators">Rxjs Operators</a></li>
+      <li><a routerLink="services">Services</a></li>
+      <li><a routerLink="communication">Component Communication</a></li>
+      <li><a routerLink="angularforms">Angular Forms</a></li>
+      <li><a routerLink="routing">Routing</a></li>
+      <li><a routerLink="view">View</a></li> -->
+      <li *ngFor="let list of menuList; let i = index;" routerLinkActive="active" (click)="setActive($event,list.link)">
+        <a routerLink={{list.link}}>{{list.name}}</a></li>
+    </ul>
+  </div>
+</div>
+</div>
+<app-sidemenu></app-sidemenu>
+<router-outlet></router-outlet>

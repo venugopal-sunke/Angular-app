@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>Services in Angular</h4>
+
+            <table class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>Index</th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Salary</th>
+                        <th>DOB</th>
+                        <th>Age</th>
+                       </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{user.id}}</td>
+                        <td>{{user.name | uppercase}}</td>
+                        <td>{{user.city | titlecase}}</td>
+                        <td>{{user.salary | currency: "INR"}}</td>
+                        <td>{{user.dob | date }}</td>
+                        <td>{{ user.dob | age }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Angular https services with custom pipe</h4>
+            <form>
+                Search Input: <input type="text" name="first" placeholder="Please enter the input...." [(ngModel)]="searchData" />
+            </form>
+                <br>
+
+            <table class="table table-bordered table-responsive">
+                <thead class="bg-primary">
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>User Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Website</th>
+                      <th>Zipcode</th>
+                      <th>Latitude</th>
+                      <th>Company Name</th>
+                    </tr>
+                   </thead>
+                   <tbody>
+                    <tr *ngFor="let info of userInfo | searchFilter : searchData">
+                        <td>{{ info.id }}</td>
+                        <td>{{ info.name }}</td>
+                        <td>{{ info.username }}</td>
+                        <td>{{ info.email }}</td>
+                        <td>{{ info.phone }}</td>
+                        <td>{{ info.website }}</td>
+                        <td>{{ info.address.zipcode }}</td>
+                        <td>{{ info.address.geo.lat }}</td>
+                        <td>{{ info.company.name }}</td>
+                    </tr>
+                   </tbody>
+            </table>
+
+            <h4>Angular https services with pagination</h4>
+            <b>In order to implement pagination from client side. We have to install the command 
+                npm install ngx-pagination --save and import import NgxPaginationModule  from ngx-pagination
+                in app.modulet.ts
+            </b><br><br><br>
+
+            <table class="table-bordered table table-responsive">
+                <thead>
+                    <tr class="bg-primary">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Body</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let comments of userComments | paginate: {id: 'coll', itemsPerPage: 10, currentPage: p}">
+                      <td>{{ comments.id }}</td>
+                      <td>{{ comments.name | uppercase }}</td>
+                      <td>{{ comments.email | lowercase}}</td>
+                      <td>{{ comments.body | titlecase}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls id='coll' (pageChange)="p = $event"></pagination-controls>
+
+            <h3>Displaying the data in Modal Dialog</h3>
+            <ul class="showUser">
+                <li *ngFor="let user of userInfo" (click)="showUserInfo(user);">
+                  <span>{{user.id}}</span>
+                  <span>{{user.name}}</span>
+                </li>
+            </ul>
+
+            <b>get isUserLoggedIn: implemented auth guard and isUserLoggedIn set to true if set to 
+            false auth guard will throw an alert "User is not allowed to access services"</b>
+
+        </div>
+    </div>
+</div>
