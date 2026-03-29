@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, inject  } from '@angular/core';
 
 @Component({
-  selector: 'app-child',
-  templateUrl: './child.component.html',
-  styleUrls: ['./child.component.css']
+    selector: 'app-child',
+    templateUrl: './child.component.html',
+    styleUrls: ['./child.component.css'],
+    standalone: false
 })
 export class ChildComponent implements OnInit{
 

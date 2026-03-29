@@ -6,9 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserdialogComponent } from './userdialog/userdialog.component';
 
 @Component({
-  selector: 'app-angularservice',
-  templateUrl: './angularservice.component.html',
-  styleUrls: ['./angularservice.component.css']
+    selector: 'app-angularservice',
+    templateUrl: './angularservice.component.html',
+    styleUrls: ['./angularservice.component.css'],
+    standalone: false
 })
 export class AngularserviceComponent implements OnInit {
 

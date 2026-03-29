@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { updateEmail, updateMobile, updateName } from './actions/actionCreater';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+    selector: 'app-form',
+    templateUrl: './form.component.html',
+    styleUrls: ['./form.component.css'],
+    standalone: false
 })
 export class FormsComponent implements OnInit{
 

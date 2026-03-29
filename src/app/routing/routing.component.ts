@@ -7,9 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserserviceService } from '../services/userservice.service';
 
 @Component({
-  selector: 'app-routing',
-  templateUrl: './routing.component.html',
-  styleUrls: ['./routing.component.css']
+    selector: 'app-routing',
+    templateUrl: './routing.component.html',
+    styleUrls: ['./routing.component.css'],
+    standalone: false
 })
 export class RoutingComponent implements OnInit, OnDestroy{
 

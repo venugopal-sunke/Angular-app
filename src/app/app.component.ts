@@ -4,9 +4,10 @@ import { Store } from '@ngrx/store';
 import { getUsers } from './angularforms/ngrxforms/actions/user.action';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit {
 

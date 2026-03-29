@@ -1,7 +1,8 @@
 import { Directive, HostListener, ElementRef, HostBinding, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[appCardhover]'
+    selector: '[appCardhover]',
+    standalone: false
 })
 export class CardhoverDirective {
 

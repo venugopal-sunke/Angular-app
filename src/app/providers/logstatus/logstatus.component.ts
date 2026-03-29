@@ -4,9 +4,10 @@ import { FakeauthenticateService } from 'src/app/services/fakeauthenticate.servi
 
 
 @Component({
-  selector: 'app-logstatus',
-  templateUrl: './logstatus.component.html',
-  styleUrls: ['./logstatus.component.css']
+    selector: 'app-logstatus',
+    templateUrl: './logstatus.component.html',
+    styleUrls: ['./logstatus.component.css'],
+    standalone: false
 })
 export class LogstatusComponent implements OnInit {
 

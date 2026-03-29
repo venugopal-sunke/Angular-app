@@ -6,9 +6,10 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { HttpusersService } from '../services/httpusers.service';
 
 @Component({
-  selector: 'app-rxjsoperators',
-  templateUrl: './rxjsoperators.component.html',
-  styleUrls: ['./rxjsoperators.component.css']
+    selector: 'app-rxjsoperators',
+    templateUrl: './rxjsoperators.component.html',
+    styleUrls: ['./rxjsoperators.component.css'],
+    standalone: false
 })
 export class RxjsoperatorsComponent implements OnInit, OnDestroy{
 

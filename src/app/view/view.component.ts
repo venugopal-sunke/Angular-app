@@ -3,9 +3,10 @@ import { ViewchildComponent } from './viewchild/viewchild.component';
 import { Counter1Service } from '../services/counter1.service';
 
 @Component({
-  selector: 'app-view',
-  templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+    selector: 'app-view',
+    templateUrl: './view.component.html',
+    styleUrls: ['./view.component.css'],
+    standalone: false
 })
 export class ViewComponent implements AfterViewInit {
 

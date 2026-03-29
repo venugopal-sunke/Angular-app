@@ -5,9 +5,10 @@ import { Subscription } from 'rxjs';
 import { HttpusersService } from 'src/app/services/httpusers.service';
 
 @Component({
-  selector: 'app-hookchild',
-  templateUrl: './hookchild.component.html',
-  styleUrls: ['./hookchild.component.css']
+    selector: 'app-hookchild',
+    templateUrl: './hookchild.component.html',
+    styleUrls: ['./hookchild.component.css'],
+    standalone: false
 })
 export class HookchildComponent implements OnChanges, OnInit, DoCheck, OnDestroy, 
 AfterContentInit, AfterContentChecked {

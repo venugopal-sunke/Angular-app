@@ -3,9 +3,10 @@ import { UserPipe, userInfo } from '../models/datamodel';
 import { HttpusersService } from '../services/httpusers.service';
 import { Observable } from 'rxjs';
 @Component({
-  selector: 'app-pipes',
-  templateUrl: './pipes.component.html',
-  styleUrls: ['./pipes.component.css']
+    selector: 'app-pipes',
+    templateUrl: './pipes.component.html',
+    styleUrls: ['./pipes.component.css'],
+    standalone: false
 })
 export class PipesComponent implements OnInit{
 

@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-childone',
-  templateUrl: './childone.component.html',
-  styleUrls: ['./childone.component.css']
+    selector: 'app-childone',
+    templateUrl: './childone.component.html',
+    styleUrls: ['./childone.component.css'],
+    standalone: false
 })
 export class ChildoneComponent {
 

@@ -3,9 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { passwordMatch } from '../validators/passwordMatch';
 
 @Component({
-  selector: 'app-angularforms',
-  templateUrl: './angularforms.component.html',
-  styleUrls: ['./angularforms.component.css']
+    selector: 'app-angularforms',
+    templateUrl: './angularforms.component.html',
+    styleUrls: ['./angularforms.component.css'],
+    standalone: false
 })
 export class AngularformsComponent implements OnInit{
 

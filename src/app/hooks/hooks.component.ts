@@ -1,9 +1,10 @@
 import { Component, AfterViewInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'app-hooks',
-  templateUrl: './hooks.component.html',
-  styleUrls: ['./hooks.component.css']
+    selector: 'app-hooks',
+    templateUrl: './hooks.component.html',
+    styleUrls: ['./hooks.component.css'],
+    standalone: false
 })
 export class HooksComponent implements AfterViewInit, AfterViewChecked{
 

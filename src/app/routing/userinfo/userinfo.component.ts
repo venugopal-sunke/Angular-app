@@ -5,9 +5,10 @@ import { HttpusersService } from 'src/app/services/httpusers.service';
 import { UserserviceService } from 'src/app/services/userservice.service';
 
 @Component({
-  selector: 'app-userinfo',
-  templateUrl: './userinfo.component.html',
-  styleUrls: ['./userinfo.component.css']
+    selector: 'app-userinfo',
+    templateUrl: './userinfo.component.html',
+    styleUrls: ['./userinfo.component.css'],
+    standalone: false
 })
 export class UserinfoComponent implements OnInit, OnDestroy{
 

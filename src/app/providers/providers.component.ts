@@ -4,9 +4,10 @@ import { APP_CONFIG_TOKEN } from '../app.module';
 import { Counter3Service } from '../services/counter3.service';
 
 @Component({
-  selector: 'app-providers',
-  templateUrl: './providers.component.html',
-  styleUrls: ['./providers.component.css']
+    selector: 'app-providers',
+    templateUrl: './providers.component.html',
+    styleUrls: ['./providers.component.css'],
+    standalone: false
 })
 export class ProvidersComponent implements OnInit{
 

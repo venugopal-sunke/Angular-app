@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { getUsers } from '../angularforms/ngrxforms/actions/user.action';
 
 @Component({
-  selector: 'app-ngrx',
-  templateUrl: './ngrx.component.html',
-  styleUrls: ['./ngrx.component.css']
+    selector: 'app-ngrx',
+    templateUrl: './ngrx.component.html',
+    styleUrls: ['./ngrx.component.css'],
+    standalone: false
 })
 export class NgrxComponent implements OnInit{
 

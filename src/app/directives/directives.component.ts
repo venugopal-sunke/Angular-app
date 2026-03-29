@@ -3,9 +3,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UserserviceService } from '../services/userservice.service';
 
 @Component({
-  selector: 'app-directives',
-  templateUrl: './directives.component.html',
-  styleUrls: ['./directives.component.css']
+    selector: 'app-directives',
+    templateUrl: './directives.component.html',
+    styleUrls: ['./directives.component.css'],
+    standalone: false
 })
 export class DirectivesComponent implements OnInit {
 

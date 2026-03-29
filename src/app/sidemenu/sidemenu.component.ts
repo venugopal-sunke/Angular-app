@@ -2,9 +2,10 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } fr
 import { UserserviceService } from '../services/userservice.service';
 
 @Component({
-  selector: 'app-sidemenu',
-  templateUrl: './sidemenu.component.html',
-  styleUrls: ['./sidemenu.component.css']
+    selector: 'app-sidemenu',
+    templateUrl: './sidemenu.component.html',
+    styleUrls: ['./sidemenu.component.css'],
+    standalone: false
 })
 export class SidemenuComponent implements OnInit, AfterViewInit, OnDestroy {
 

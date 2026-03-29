@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-staticforms',
-  templateUrl: './staticforms.component.html',
-  styleUrls: ['./staticforms.component.css']
+    selector: 'app-staticforms',
+    templateUrl: './staticforms.component.html',
+    styleUrls: ['./staticforms.component.css'],
+    standalone: false
 })
 export class StaticformsComponent implements OnInit {
   constructor(){}
