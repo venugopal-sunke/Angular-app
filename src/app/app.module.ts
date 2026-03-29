@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -72,72 +72,63 @@ const APP_CONFIG = Object.freeze({
 
  export const APP_CONFIG_TOKEN = new InjectionToken<any>('AppConfig')
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    EventsComponent,
-    SidemenuComponent,
-    BindingComponent,
-    RepeatloopComponent,
-    DirectivesComponent,
-    HighlightDirective,
-    MouseeventDirective,
-    CardhoverDirective,
-    PipesComponent,
-    AgePipe,
-    ArraysortPipe,
-    RxjsoperatorsComponent,
-    AngularserviceComponent,
-    SearchFilterPipe,
-    UserdialogComponent,
-    ParentComponent,
-    ChildComponent,
-    AngularformsComponent,
-    StaticformsComponent,
-    ReactiveformsComponent,
-    RoutingComponent,
-    UserinfoComponent,
-    ViewComponent,
-    ViewchildComponent,
-    SpinnerComponent,
-    HooksComponent,
-    HookchildComponent,
-    ChildoneComponent,
-    AddressComponent,
-    CompanyComponent,
-    GuardsComponent,
-    ProvidersComponent,
-    LogstatusComponent,
-    NgrxComponent,
-    FormsComponent,
-    DateformatPipe
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgxPaginationModule,
-    StoreModule.forRoot({user: userReducer, users: myUserReducer}, {}),
-    EffectsModule.forRoot([UserEffect]),
-    StoreDevtoolsModule.instrument({ 
+@NgModule({ declarations: [
+        AppComponent,
+        EventsComponent,
+        SidemenuComponent,
+        BindingComponent,
+        RepeatloopComponent,
+        DirectivesComponent,
+        HighlightDirective,
+        MouseeventDirective,
+        CardhoverDirective,
+        PipesComponent,
+        AgePipe,
+        ArraysortPipe,
+        RxjsoperatorsComponent,
+        AngularserviceComponent,
+        SearchFilterPipe,
+        UserdialogComponent,
+        ParentComponent,
+        ChildComponent,
+        AngularformsComponent,
+        StaticformsComponent,
+        ReactiveformsComponent,
+        RoutingComponent,
+        UserinfoComponent,
+        ViewComponent,
+        ViewchildComponent,
+        SpinnerComponent,
+        HooksComponent,
+        HookchildComponent,
+        ChildoneComponent,
+        AddressComponent,
+        CompanyComponent,
+        GuardsComponent,
+        ProvidersComponent,
+        LogstatusComponent,
+        NgrxComponent,
+        FormsComponent,
+        DateformatPipe
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        MaterialModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgxPaginationModule,
+        StoreModule.forRoot({ user: userReducer, users: myUserReducer }, {}),
+        EffectsModule.forRoot([UserEffect]),
+        StoreDevtoolsModule.instrument({
             maxAge: 25, // if we remove this it will take unlimited states
-            logOnly: !isDevMode() }),
-  ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true}, 
-              HttpusersService, AuthService, UserserviceService,
-              {provide: Counter1Service, useClass: Counter2Service},
-
-              {provide: AuthenticateService, useClass: AuthenticateService},
-              {provide: FakeauthenticateService, useExisting: AuthenticateService},
-              
-              {provide: APP_CONFIG_TOKEN, useValue: APP_CONFIG},
-              counterFactory,
-              TestService,
-              ],
-  bootstrap: [AppComponent]
-})
+            logOnly: !isDevMode()
+        })], providers: [{ provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
+        HttpusersService, AuthService, UserserviceService,
+        { provide: Counter1Service, useClass: Counter2Service },
+        { provide: AuthenticateService, useClass: AuthenticateService },
+        { provide: FakeauthenticateService, useExisting: AuthenticateService },
+        { provide: APP_CONFIG_TOKEN, useValue: APP_CONFIG },
+        counterFactory,
+        TestService, provideHttpClient(withInterceptorsFromDi()),] })
 export class AppModule { }
