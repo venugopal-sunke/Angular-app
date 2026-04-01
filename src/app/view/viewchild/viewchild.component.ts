@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-viewchild',
     templateUrl: './viewchild.component.html',
     styleUrls: ['./viewchild.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [FormsModule]
 })
 export class ViewchildComponent {
 

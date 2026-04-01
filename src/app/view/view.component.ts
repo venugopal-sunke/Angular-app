@@ -6,7 +6,8 @@ import { Counter1Service } from '../services/counter1.service';
     selector: 'app-view',
     templateUrl: './view.component.html',
     styleUrls: ['./view.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [ViewchildComponent]
 })
 export class ViewComponent implements AfterViewInit {
 
