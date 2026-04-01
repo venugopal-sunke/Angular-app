@@ -1,12 +1,20 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { Component, OnInit } from '@angular/core';
+import { MatSlideToggleModule, MatSlideToggle } from '@angular/material/slide-toggle';
 import { UserserviceService } from '../services/userservice.service';
+import { CommonModule } from '@angular/common';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatTooltip } from '@angular/material/tooltip';
+import { HighlightDirective } from '../customdirectives/highlight.directive';
+import { MouseeventDirective } from '../customdirectives/mouseevent.directive';
+import { CardhoverDirective } from '../customdirectives/cardhover.directive';
 
 @Component({
     selector: 'app-directives',
     templateUrl: './directives.component.html',
     styleUrls: ['./directives.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, MatCardContent, MatSlideToggle, MatTooltip, MatCard, HighlightDirective,
+              MouseeventDirective, CardhoverDirective]
 })
 export class DirectivesComponent implements OnInit {
 

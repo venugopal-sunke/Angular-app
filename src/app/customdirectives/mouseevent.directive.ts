@@ -2,7 +2,7 @@ import { Directive, HostListener, ElementRef, OnInit, HostBinding } from '@angul
 
 @Directive({
     selector: '[appMouseevent]',
-    standalone: false
+    standalone: true
 })
 export class MouseeventDirective implements OnInit{
  

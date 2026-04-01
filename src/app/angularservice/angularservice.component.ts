@@ -4,12 +4,18 @@ import { UserPipe, comments, userInfo } from '../models/datamodel';
 import { HttpusersService } from '../services/httpusers.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UserdialogComponent } from './userdialog/userdialog.component';
+import { CommonModule } from '@angular/common';
+import { AgePipe } from "../custompipes/age.pipe";
+import { FormsModule } from '@angular/forms';
+import { SearchFilterPipe } from '../custompipes/search-filter.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
     selector: 'app-angularservice',
     templateUrl: './angularservice.component.html',
     styleUrls: ['./angularservice.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, AgePipe, FormsModule, SearchFilterPipe, NgxPaginationModule],
 })
 export class AngularserviceComponent implements OnInit {
 

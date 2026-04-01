@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 
 import { trigger, transition, style, animate } from '@angular/animations';
+import { MatDivider } from "@angular/material/divider";
 @Component({
     selector: 'app-userdialog',
     templateUrl: './userdialog.component.html',
@@ -12,7 +13,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
             transition(':leave', [style({ opacity: 1 }), animate('500ms', style({ opacity: 0 }))])
         ])
     ],
-    standalone: false
+    standalone: true,
+    imports: [MatDivider, MatDialogActions, MatDialogClose]
 })
 export class UserdialogComponent implements OnInit{
 

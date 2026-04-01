@@ -2,7 +2,7 @@ import { Directive, HostListener, ElementRef, HostBinding, Renderer2 } from '@an
 
 @Directive({
     selector: '[appCardhover]',
-    standalone: false
+    standalone: true
 })
 export class CardhoverDirective {
 

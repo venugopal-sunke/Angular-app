@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MaterialModule } from '../app.material';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-repeatloop',
     templateUrl: './repeatloop.component.html',
     styleUrls: ['./repeatloop.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule]
 })
 export class RepeatloopComponent implements OnInit {
   

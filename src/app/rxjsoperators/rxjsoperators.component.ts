@@ -2,14 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of, take, debounceTime, interval, from, Subscription, Subject, takeUntil, map, distinct, filter, BehaviorSubject, delay} from 'rxjs';
 import { UserPipe } from '../models/datamodel';
 import { headermenus } from '../mocks/menus';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpusersService } from '../services/httpusers.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-rxjsoperators',
     templateUrl: './rxjsoperators.component.html',
     styleUrls: ['./rxjsoperators.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class RxjsoperatorsComponent implements OnInit, OnDestroy{
 

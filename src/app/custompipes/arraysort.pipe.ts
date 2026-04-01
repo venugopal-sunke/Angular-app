@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'arraysort',
-    standalone: false
+    standalone: true
 })
 export class ArraysortPipe implements PipeTransform {
 

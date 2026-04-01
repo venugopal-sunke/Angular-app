@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { UserserviceService } from '../services/userservice.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
     selector: 'app-events',
     templateUrl: './events.component.html',
     styleUrls: ['./events.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, FormsModule, MatCheckbox]
 })
 export class EventsComponent implements OnInit {
 

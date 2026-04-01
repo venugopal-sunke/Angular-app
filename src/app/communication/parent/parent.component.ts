@@ -30,6 +30,7 @@ export class ParentComponent implements OnInit, AfterViewInit{
 
   info: string = '';
   childMsg(data: string){
+    console.log("Data from child component: ", data);
     this.info = data;
   }
 

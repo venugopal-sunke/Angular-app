@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { UserPipe, userInfo } from '../models/datamodel';
 import { HttpusersService } from '../services/httpusers.service';
 import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { ArraysortPipe } from '../custompipes/arraysort.pipe';
+import { AgePipe } from '../custompipes/age.pipe';
 @Component({
     selector: 'app-pipes',
     templateUrl: './pipes.component.html',
     styleUrls: ['./pipes.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, ArraysortPipe, AgePipe]
 })
 export class PipesComponent implements OnInit{
 

@@ -3,7 +3,7 @@ import { userInfo } from '../models/datamodel';
 
 @Pipe({
     name: 'searchFilter',
-    standalone: false
+    standalone: true
 })
 export class SearchFilterPipe implements PipeTransform {
 

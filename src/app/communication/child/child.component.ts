@@ -13,8 +13,7 @@ export class ChildComponent implements OnInit{
   private cdr = inject(ChangeDetectorRef);
 
   @Input() parentInfo: string='';
-  @Output()
-  childData : EventEmitter<string> = new EventEmitter<string>();
+  @Output() childData : EventEmitter<string> = new EventEmitter<string>();
 
   someProperty: string = "Data communication between components";
   message = 'Hello World!';
