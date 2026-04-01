@@ -1,10 +1,13 @@
 import { Component, AfterViewInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HookchildComponent } from './hookchild/hookchild.component';
 
 @Component({
     selector: 'app-hooks',
     templateUrl: './hooks.component.html',
     styleUrls: ['./hooks.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [FormsModule, HookchildComponent]
 })
 export class HooksComponent implements AfterViewInit, AfterViewChecked{
 

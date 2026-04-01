@@ -8,7 +8,8 @@ import { HttpusersService } from 'src/app/services/httpusers.service';
     selector: 'app-hookchild',
     templateUrl: './hookchild.component.html',
     styleUrls: ['./hookchild.component.css'],
-    standalone: false
+    standalone: true,
+    imports: []
 })
 export class HookchildComponent implements OnChanges, OnInit, DoCheck, OnDestroy, 
 AfterContentInit, AfterContentChecked {
