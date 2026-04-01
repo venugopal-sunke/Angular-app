@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, inject  } from '@angular/core';
 
 @Component({
     selector: 'app-child',
     templateUrl: './child.component.html',
     styleUrls: ['./child.component.css'],
-    standalone: false
+    standalone: true,
+    imports: []
 })
 export class ChildComponent implements OnInit{
 

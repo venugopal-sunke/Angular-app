@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-childone',
     templateUrl: './childone.component.html',
     styleUrls: ['./childone.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class ChildoneComponent {
 
