@@ -1,11 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-staticforms',
     templateUrl: './staticforms.component.html',
     styleUrls: ['./staticforms.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule, FormsModule]
 })
 export class StaticformsComponent implements OnInit {
   constructor(){}

@@ -1,12 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-reactiveforms',
     templateUrl: './reactiveforms.component.html',
     styleUrls: ['./reactiveforms.component.css'],
-    standalone: false
-})
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule]
+  })
 export class ReactiveformsComponent implements OnInit{
 
   studentRegisterForm : FormGroup;
@@ -123,7 +125,7 @@ export class ReactiveformsComponent implements OnInit{
   }
 
   onSubmit(){
-
+    
   }
 
 }

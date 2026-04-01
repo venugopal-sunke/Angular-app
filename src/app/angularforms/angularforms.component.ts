@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordMatch } from '../validators/passwordMatch';
+import { CommonModule } from '@angular/common';
+import { StaticformsComponent } from './staticforms/staticforms.component';
+import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component';
 
 @Component({
     selector: 'app-angularforms',
     templateUrl: './angularforms.component.html',
     styleUrls: ['./angularforms.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule, StaticformsComponent, ReactiveformsComponent]
 })
 export class AngularformsComponent implements OnInit{
 
