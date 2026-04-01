@@ -5,12 +5,15 @@ import { Observable, Subscription } from 'rxjs';
 import { SpinnerService } from '../services/spinner.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserserviceService } from '../services/userservice.service';
+import { CommonModule } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
     selector: 'app-routing',
     templateUrl: './routing.component.html',
     styleUrls: ['./routing.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, MatTooltip] 
 })
 export class RoutingComponent implements OnInit, OnDestroy{
 
@@ -19,7 +22,7 @@ export class RoutingComponent implements OnInit, OnDestroy{
     private spinnerService: SpinnerService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private userInfo: UserserviceService,
+   // private userInfo: UserserviceService,
   ){}
 
   usersData: Array<userInfo> = [];

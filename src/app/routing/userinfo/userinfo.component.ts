@@ -1,5 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { userInfo } from 'src/app/models/datamodel';
 import { HttpusersService } from 'src/app/services/httpusers.service';
 import { UserserviceService } from 'src/app/services/userservice.service';
@@ -8,7 +9,8 @@ import { UserserviceService } from 'src/app/services/userservice.service';
     selector: 'app-userinfo',
     templateUrl: './userinfo.component.html',
     styleUrls: ['./userinfo.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, RouterModule]
 })
 export class UserinfoComponent implements OnInit, OnDestroy{
 
@@ -16,7 +18,6 @@ export class UserinfoComponent implements OnInit, OnDestroy{
     private activatedRoute: ActivatedRoute,
     private userService: HttpusersService,
     private router: Router,
-    private userInfoService: UserserviceService,
   ){}
 
   userData:any = {};
