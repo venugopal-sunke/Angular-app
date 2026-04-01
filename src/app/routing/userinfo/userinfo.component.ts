@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { userInfo } from 'src/app/models/datamodel';
 import { HttpusersService } from 'src/app/services/httpusers.service';
-import { UserserviceService } from 'src/app/services/userservice.service';
 
 @Component({
     selector: 'app-userinfo',
