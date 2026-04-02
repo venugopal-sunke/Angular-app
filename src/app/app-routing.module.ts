@@ -23,6 +23,7 @@ import { authDeactivateGuard } from './guards/auth.deactivateGuard';
 import { authResolveGuard } from './guards/auth.resolveGuard';
 import { ProvidersComponent } from './providers/providers.component';
 import { NgrxComponent } from './ngrx/ngrx.component';
+import { SignalsComponent } from './signals/signals.component';
 
 const routes: Routes = [
   {
@@ -114,6 +115,10 @@ const routes: Routes = [
   {
     path: 'ngrx',
     component: NgrxComponent
+  },
+  {
+    path: 'signals',
+    component: SignalsComponent
   },
   {
     path: '**',

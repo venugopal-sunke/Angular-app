@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getUsers } from '../angularforms/ngrxforms/actions/user.action';
+import { CommonModule } from '@angular/common';
+import { FormsComponent } from '../angularforms/ngrxforms/form.component';
 
 @Component({
     selector: 'app-ngrx',
     templateUrl: './ngrx.component.html',
     styleUrls: ['./ngrx.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, FormsComponent]
 })
 export class NgrxComponent implements OnInit{
 

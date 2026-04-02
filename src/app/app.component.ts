@@ -33,7 +33,8 @@ export class AppComponent implements OnInit {
     {name: 'Life Cycle Hooks', link: 'hooks'},
     {name: 'Guards', link: 'guards'},
     {name: 'DI Providers', link: 'dependencyproviders'},
-    {name: 'Ngrx', link: 'ngrx'}
+    {name: 'Ngrx', link: 'ngrx'},
+    {name: 'Signals', link: 'signals'},
   ];
 
   setActive(event: Event,link: string){}

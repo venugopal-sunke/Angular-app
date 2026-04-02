@@ -107,9 +107,10 @@ const APP_CONFIG = Object.freeze({
        // GuardsComponent,
        // ProvidersComponent,
        // LogstatusComponent,
-        NgrxComponent,
-        FormsComponent,
-        DateformatPipe
+       // NgrxComponent,
+        //FormsComponent,
+        DateformatPipe,
+        //SignalsComponent,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,

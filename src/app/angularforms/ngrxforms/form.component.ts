@@ -1,12 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { updateEmail, updateMobile, updateName } from './actions/actionCreater';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-form',
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [FormsModule]
 })
 export class FormsComponent implements OnInit{
 
