@@ -2,12 +2,14 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Counter1Service } from '../services/counter1.service';
 import { APP_CONFIG_TOKEN } from '../app.module';
 import { Counter3Service } from '../services/counter3.service';
+import { LogstatusComponent } from './logstatus/logstatus.component';
 
 @Component({
     selector: 'app-providers',
     templateUrl: './providers.component.html',
     styleUrls: ['./providers.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [LogstatusComponent]
 })
 export class ProvidersComponent implements OnInit{
 

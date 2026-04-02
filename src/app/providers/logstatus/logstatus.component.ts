@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { FakeauthenticateService } from 'src/app/services/fakeauthenticate.service';
@@ -7,7 +8,8 @@ import { FakeauthenticateService } from 'src/app/services/fakeauthenticate.servi
     selector: 'app-logstatus',
     templateUrl: './logstatus.component.html',
     styleUrls: ['./logstatus.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
 export class LogstatusComponent implements OnInit {
 

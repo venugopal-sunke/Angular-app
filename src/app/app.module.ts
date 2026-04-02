@@ -105,8 +105,8 @@ const APP_CONFIG = Object.freeze({
         //AddressComponent,
       //  CompanyComponent,
        // GuardsComponent,
-        ProvidersComponent,
-        LogstatusComponent,
+       // ProvidersComponent,
+       // LogstatusComponent,
         NgrxComponent,
         FormsComponent,
         DateformatPipe
