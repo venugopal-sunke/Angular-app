@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpusersService } from '../services/httpusers.service';
 import { userInfo } from '../models/datamodel';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { SpinnerService } from '../services/spinner.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserserviceService } from '../services/userservice.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 
@@ -22,7 +21,6 @@ export class RoutingComponent implements OnInit, OnDestroy{
     private spinnerService: SpinnerService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-   // private userInfo: UserserviceService,
   ){}
 
   usersData: Array<userInfo> = [];

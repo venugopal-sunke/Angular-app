@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
     selector: 'app-company',
     templateUrl: './company.component.html',
     styleUrls: ['./company.component.css'],
-    standalone: false
+    standalone: true,
+    imports: []
 })
 export class CompanyComponent {
 
