@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
@@ -10,7 +10,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 })
 export class GuardsComponent implements OnInit{
 
-  constructor(private activatedRoute: ActivatedRoute){}
+  // constructor(private activatedRoute: ActivatedRoute){}
+  private activatedRoute = inject(ActivatedRoute);
 
    ngOnInit(): void {
      console.log('Resolve guard:::',this.activatedRoute.snapshot.data['userData']);

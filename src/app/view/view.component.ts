@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewChildren, AfterViewInit, ElementRef, QueryList, TemplateRef } from '@angular/core';
+import { Component, ViewChild, ViewChildren, AfterViewInit, ElementRef, QueryList, TemplateRef, inject } from '@angular/core';
 import { ViewchildComponent } from './viewchild/viewchild.component';
 import { Counter1Service } from '../services/counter1.service';
 
@@ -11,7 +11,9 @@ import { Counter1Service } from '../services/counter1.service';
 })
 export class ViewComponent implements AfterViewInit {
 
-  constructor(private counter1: Counter1Service,){}
+  // constructor(private counter1: Counter1Service,){}
+
+  private counter1 = inject(Counter1Service);
 
   @ViewChild('headline') headline: ElementRef;
 

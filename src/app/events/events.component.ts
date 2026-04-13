@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserserviceService } from '../services/userservice.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,9 +18,7 @@ export class EventsComponent implements OnInit {
   public count: number = 0;
   menuItem: any = null;
 
-  constructor(
-    private userService: UserserviceService
-  ) { }
+  private userService = inject(UserserviceService);
 
   ngOnInit(): void {
     this.userService.sideMenu$.subscribe((data: any) => {

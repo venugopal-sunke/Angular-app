@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaterialModule } from '../app.material';
 import { CommonModule } from '@angular/common';
@@ -16,17 +16,19 @@ export class RepeatloopComponent implements OnInit {
   userData: any = [];
   countryId: number=0;
 
-  constructor(
-    private formBuilder: FormBuilder
-  ){
-    this.addUserForm = this.formBuilder.group({
-        username: new FormControl('',[Validators.required]),
-        designation: new FormControl('',[Validators.required]),
-        skills: new FormControl('',[Validators.required]),
-        place: new FormControl('',[Validators.required]),
-        experience: new FormControl('',[Validators.required]),
-    })
-  }
+  private formBuilder = inject(FormBuilder);
+
+  // constructor(
+  //   private formBuilder: FormBuilder
+  // ){
+  //   this.addUserForm = this.formBuilder.group({
+  //       username: new FormControl('',[Validators.required]),
+  //       designation: new FormControl('',[Validators.required]),
+  //       skills: new FormControl('',[Validators.required]),
+  //       place: new FormControl('',[Validators.required]),
+  //       experience: new FormControl('',[Validators.required]),
+  //   });
+  // }
 
   details = [
     {name: 'John', designation: 'Advisor', place: 'US', experience: 5},
@@ -99,7 +101,13 @@ cars = [
 selectedCar: string = 'bmw'
 
   ngOnInit(): void {
-    
+    this.addUserForm = this.formBuilder.group({
+        username: new FormControl('',[Validators.required]),
+        designation: new FormControl('',[Validators.required]),
+        skills: new FormControl('',[Validators.required]),
+        place: new FormControl('',[Validators.required]),
+        experience: new FormControl('',[Validators.required]),
+    });
   }
 
   addUser(){

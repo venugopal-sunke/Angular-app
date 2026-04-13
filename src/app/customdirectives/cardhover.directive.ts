@@ -8,9 +8,9 @@ export class CardhoverDirective {
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 
-  @HostBinding('class.card-outline-primary') private ishovering: boolean = false;
+  @HostBinding('class.card-outline-primary') ishovering: boolean = false;
 
-  @HostListener('mouseenter') MouseEnter($event: Event) {
+  @HostListener('mouseenter') MouseEnter() {
     let part = this.el.nativeElement.querySelector('.card-text');
     this.renderer.setStyle(part, 'display', 'block');
     this.ishovering = true;

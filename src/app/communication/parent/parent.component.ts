@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, inject } from '@angular/core';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { ChildComponent } from '../child/child.component';
 import { CommonModule } from '@angular/common';
@@ -13,9 +13,11 @@ import { ChildoneComponent } from "../childone/childone.component";
 })
 export class ParentComponent implements OnInit, AfterViewInit{
 
-  constructor(
-    private userService: UserserviceService,
-  ){}
+  // constructor(
+  //   private userService: UserserviceService,
+  // ){}
+
+  private userService = inject(UserserviceService);
 
   parentMsg: string=" This is the message coming from parent component";
   contentData: Array<any> = [];

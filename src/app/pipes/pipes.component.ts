@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserPipe, userInfo } from '../models/datamodel';
 import { HttpusersService } from '../services/httpusers.service';
 import { Observable } from 'rxjs';
@@ -24,9 +24,7 @@ export class PipesComponent implements OnInit{
   ];
   numArray: any = [45,7,98,5,108,2,8];
 
-  constructor(
-    private httpUserService: HttpusersService,
-  ){}
+  private httpUserService = inject(HttpusersService);
 
  // usersData$: Array<userInfo>;
    usersData$: Observable<Array<userInfo>>

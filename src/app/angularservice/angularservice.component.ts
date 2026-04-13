@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserserviceService } from '../services/userservice.service';
 import { UserPipe, comments, userInfo } from '../models/datamodel';
 import { HttpusersService } from '../services/httpusers.service';
@@ -19,11 +19,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class AngularserviceComponent implements OnInit {
 
-  constructor(
-    private userService: UserserviceService,
-    private httpUser: HttpusersService,
-    public dialog: MatDialog,
-  ){}
+  // constructor(
+  //   private userService: UserserviceService,
+  //   private httpUser: HttpusersService,
+  //   public dialog: MatDialog,
+  // ){}
+
+  private userService = inject(UserserviceService);
+  private httpUser = inject(HttpusersService);
+  public dialog = inject(MatDialog);
 
   users: Array<UserPipe> = [];
   searchData: string = "";

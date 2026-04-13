@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatSlideToggleModule, MatSlideToggle } from '@angular/material/slide-toggle';
 import { UserserviceService } from '../services/userservice.service';
 import { CommonModule } from '@angular/common';
@@ -43,9 +43,7 @@ export class DirectivesComponent implements OnInit {
   }
   hasError: boolean = false;
 
-  constructor(
-    private userService: UserserviceService
-  ){}
+  private userService = inject(UserserviceService);
 
   ngOnInit(): void {
     this.userService.countValue$.subscribe((data: any)=>{
