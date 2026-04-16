@@ -71,7 +71,8 @@
  <div formArrayName="employees">
   <div *ngFor="let employee of employeesaa.controls; let empIndex=index;">
    <div [formGroupName]="empIndex" >
-    {{empIndex}} First Name: <input placeholder="firstName" type="text"  formControlName="firstName"/>
+    {{empIndex}} 
+    First Name: <input placeholder="firstName" type="text"  formControlName="firstName"/>
     LastName: <input placeholder="lastName" type="text" formControlName="lastName"/>
     <button type="button" (click)="removeEmployee(empIndex)">Remove</button>
     <div formArrayName="skills">

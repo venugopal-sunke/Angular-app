@@ -52,7 +52,7 @@ export class ReactiveformsComponent implements OnInit{
       firstName: '',
       lastName: '',
       skills: this.formBuilder.array([]),
-    })
+    });
   }
   addEmployee(){
     this.employeesaa.push(this.newEmployee());
