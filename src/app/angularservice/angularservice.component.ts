@@ -9,6 +9,8 @@ import { AgePipe } from "../custompipes/age.pipe";
 import { FormsModule } from '@angular/forms';
 import { SearchFilterPipe } from '../custompipes/search-filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
     selector: 'app-angularservice',
@@ -55,11 +57,47 @@ export class AngularserviceComponent implements OnInit {
         console.log(data,'eererer venugpoal')
         
       }
-    })
+      
+    });
 
     this.httpUser.getUserComments().subscribe((data: any)=>{
       //console.log(data,'usercomments');
        this.userComments = data;
+    });
+  }
+
+  // Generate PDF report of users data
+  generatePDF() {
+     this.httpUser.getAllUsersData().subscribe({
+      next: (data)=>{
+       const pdf = new jsPDF();
+
+       pdf.setFontSize(18);
+       pdf.text('Users Report', 14, 20);
+
+       let y = 40;
+
+          autoTable(pdf, {
+        startY: 30,
+        head: [
+          ['ID', 'Name', 'Username', 'Email', 'Phone']
+        ],
+        body: data.map((user: userInfo) => [
+          user.id,
+          user.name,
+          user.username,
+          user.email,
+          user.phone
+        ])
+      });
+
+      pdf.save('users.pdf');
+      },
+
+      error: (data)=>{
+        console.log(data,'eererer venugpoal')
+      }
+      
     });
   }
 

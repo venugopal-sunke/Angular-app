@@ -67,7 +67,7 @@
 
 <br>
 <h2>Dynamic Form controls.</h2>
-<form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+<!-- <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
  <div formArrayName="employees">
   <div *ngFor="let employee of employeesaa.controls; let empIndex=index;">
    <div [formGroupName]="empIndex" >
@@ -89,4 +89,103 @@
   </div>
   <button type="button" (click)="addEmployee()">Add</button>
  </div>
+</form> -->
+
+<form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="employees">
+    <div *ngFor="let employee of employeesaa.controls; let empIndex = index">
+      <div [formGroupName]="empIndex">
+        {{ empIndex }}
+        First Name:
+        <input
+          placeholder="firstName"
+          type="text"
+          formControlName="firstName"
+        />
+        <div
+          style="color: red"
+          *ngIf="
+            employee.get('firstName')?.touched &&
+            employee.get('firstName')?.invalid
+          "
+        >
+          <small *ngIf="employee.get('firstName')?.errors?.['required']">
+            First Name is required
+          </small>
+          <small *ngIf="employee.get('firstName')?.errors?.['minlength']">
+            Minimum 2 characters required
+          </small>
+        </div>
+        LastName:
+        <input placeholder="lastName" type="text" formControlName="lastName" />
+        <div
+          style="color: red"
+          *ngIf="
+            employee.get('lastName')?.touched &&
+            employee.get('lastName')?.invalid
+          "
+        >
+          <small *ngIf="employee.get('lastName')?.errors?.['required']">
+            Last Name is required
+          </small>
+          <small *ngIf="employee.get('lastName')?.errors?.['minlength']">
+            Minimum 2 characters required
+          </small>
+        </div>
+        <button (click)="removeEmployee(empIndex)">remove</button>
+        <div formArrayName="skills">
+          <div
+            *ngFor="
+              let skill of employeeSkills(empIndex).controls;
+              let skillIndex = index
+            "
+          >
+            <div [formGroupName]="skillIndex">
+              {{ skillIndex }} skill:
+              <input type="text" placeholder="skill" formControlName="skill" />
+              <div
+                style="color: red"
+                *ngIf="
+                  skill.get('skill')?.touched && skill.get('skill')?.invalid
+                "
+              >
+                <small *ngIf="skill.get('skill')?.errors?.['required']">
+                  Skill field value is required
+                </small>
+                <small *ngIf="skill.get('skill')?.errors?.['minlength']">
+                  Minimum 2 characters required
+                </small>
+              </div>
+              experience:
+              <input
+                type="text"
+                placeholder="experience"
+                formControlName="experience"
+              />
+              <div
+                style="color: red"
+                *ngIf="
+                  skill.get('experience')?.touched &&
+                  skill.get('experience')?.invalid
+                "
+              >
+                <small *ngIf="skill.get('experience')?.errors?.['required']">
+                  Experience field value is required
+                </small>
+                <small *ngIf="skill.get('experience')?.errors?.['minlength']">
+                  Minimum 2 characters required
+                </small>
+              </div>
+              <button type="button" (click)="removeSkill(empIndex, skillIndex)">
+                Remove Skill
+              </button>
+            </div>
+          </div>
+          <button type="button" (click)="addSkill(empIndex)">Add Skill</button>
+        </div>
+      </div>
+    </div>
+    <button type="button" (click)="addEmployee()">Add</button>
+    <!-- <button type="submit" [disabled]="empForm.invalid">Submit</button> -->
+  </div>
 </form>

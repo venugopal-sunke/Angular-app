@@ -49,8 +49,8 @@ export class ReactiveformsComponent implements OnInit{
 
   newEmployee(): FormGroup {
     return this.formBuilder.group({
-      firstName: '',
-      lastName: '',
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
       skills: this.formBuilder.array([]),
     });
   }
@@ -68,8 +68,8 @@ export class ReactiveformsComponent implements OnInit{
 
   newEmployeeSkill(): FormGroup {
     return this.formBuilder.group({
-      skill: '',
-      experience: ''
+      skill: ['', [Validators.required, Validators.minLength(2)]],
+      experience: ['', [Validators.required, Validators.minLength(1)]],
     })
   }
 
