@@ -19,15 +19,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of users; let i = index;">
+                    @for (user of users; track user.id; let i = $index) {
+                    <tr>
                         <td>{{ i+1 }}</td>
                         <td>{{ user.id }}</td>
                         <td>{{ user.name | uppercase }}</td>
                         <td>{{ user.city | titlecase }}</td>
                         <td>{{ user.salary | currency: 'INR': 'symbol': '3.3-3'}}</td>
-                        <td>{{ user.dob | date: 'dd/MM/YYYY'}}</td>
+                        <td>{{ user.dob | date: 'dd/MM/yyyy'}}</td>
                         <td>{{ user.dob | age }}</td>
                     </tr>
+                }
                 </tbody>
             </table>
 
@@ -35,17 +37,20 @@
 
             <ul>
                 <li><b>Ascending order</b></li>
-                <li *ngFor="let num of numArray | arraysort : 'ascending' ">{{num}}</li>
+                @for (num of numArray | arraysort: 'ascending'; track num) {
+                 <li>{{num}}</li>
+                }
             </ul>
 
             <pre>{{users | json}}</pre>
 
             <h3>Async pipe in Angular</h3>
             <ul class="user">
-                <li *ngFor="let user of (usersData$ | async)">
-                    {{user?.id}}:::
-                    {{user?.name}}
-                </li>
+               @for (user of (usersData$ | async); track user.id) {
+                    <li>
+                        {{ user.id }}::: {{ user.name }}
+                    </li>
+                }
             </ul>
             <p><b>when using async pipe, no need to use subscribe method in services when making 
                 an API request.</b></p>

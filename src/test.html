@@ -1,0 +1,1541 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Request Document</title>
+    <script src="../../ClientGlobalContext.js.aspx" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .modal {
+            width: 650px;
+            background: #ffffff;
+            margin: 40px auto;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .modal-body {
+            padding: 30px 60px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .form-group label.title {
+            width: 160px;
+            font-size: 14px;
+            color: #333;
+            line-height: 32px;
+        }
+
+        select,
+        input {
+            width: 320px;
+            padding: 8px 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+            background-color: #f3f3f3;
+            font-size: 14px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #1976d2;
+            background-color: #fff;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            position: sticky;
+            bottom: 0;
+            z-index: 5;
+        }
+
+        .btn {
+            min-width: 130px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+        }
+
+        .btn-request {
+            background-color: #dcdcdc;
+            color: #777;
+            cursor: not-allowed;
+        }
+
+        .btn-cancel {
+            background-color: #1f6fb2;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-cancel:hover {
+            background-color: #155a91;
+        }
+
+        /* Fix dropdown height */
+        .choices {
+            width: 400px;
+        }
+
+        .choices__inner {
+            min-height: 38px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        /* Prevent shrinking when empty */
+        .choices__list--multiple {
+            min-height: 38px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        /* Dropdown menu height */
+        .choices__list--dropdown {
+            width: 310px;
+            overflow-y: auto;
+        }
+
+        /* --- Checkbox styling inside Choices --- */
+        .choices__item--selectable {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .choices__item--selectable::before {
+            content: "☐";
+            /* unchecked by default */
+            margin-right: 8px;
+            color: #999;
+        }
+
+        .choices__item--selectable[aria-selected="true"]::before,
+        .choices__item--selectable.is-selected::before {
+            content: "☑";
+            /* checked when selected */
+            color: #1976d2;
+            overflow: visible;
+        }
+
+        /* --- Dropdown arrow icon --- */
+        .choices[data-type*="select-multiple"] .choices__inner::after {
+            content: "▼";
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #555;
+        }
+
+        .main-body {
+            margin: 30px;
+            height: 500px;
+        }
+
+        .form-group select {
+            min-height: 38px;
+        }
+
+        #commentPopup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .popup-body {
+            background: white;
+            padding: 20px;
+            width: 600px;
+            border-radius: 6px;
+        }
+
+        .email-preview {
+            background: #f7f7f7;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .preview-row {
+            margin-bottom: 10px;
+        }
+
+        .preview-body {
+            background: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+            min-height: 80px;
+        }
+
+        #docMessage {
+            display: none;
+            background: #fde7e9;
+            color: #a4262c;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        #otherDocumentContainer {
+         justify-content: flex-end;
+         flex-wrap: wrap;
+        }
+       
+        #otherDocumentContainer .btn.btn-cancel{
+           min-width: 70px;
+           padding: 8px 8px;
+        }
+
+        #itemInput {
+            padding: 8px;
+            width: 250px;
+        }
+
+        #addBtn {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        #itemList {
+            width: 350px;
+        }
+
+        #itemList li {
+            border: 1px solid rgba(0, 0, 0, .125);
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            border: none;
+            background: transparent;
+            color: red;
+            font-size: 18px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        .delete-btn:hover {
+            color: darkred;
+        }
+                /* List container */
+        #itemList {
+            width: 400px;
+            padding: 0;
+            margin: 20px 0;
+            list-style-position: inside;
+        }
+
+        /* Each list item */
+        #itemList li {
+            background: #ffffff;
+            padding: 8px 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            transition: all 0.2s ease;
+            border-top-width: 0;
+        }
+
+        #itemList li:first-child {
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
+        }
+
+        #itemList li:last-child {
+          border-bottom-left-radius: 4px;
+          border-bottom-right-radius: 4px;
+        }
+
+        #itemList li::marker{
+          color: #212529;
+        }
+
+        /* Text + delete button */
+        .list-item {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: calc(100% - 25px);
+        }
+
+        /* Item text */
+        .list-item span {
+            color: #212529;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        /* Delete button */
+        .delete-btn {
+            width: 28px;
+            height: 28px;
+            border: none;
+            border-radius: 50%;
+            background: #fee2e2;
+            color: #dc2626;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transition: all 0.2s ease;
+        }
+
+        /* Delete button hover */
+        .delete-btn:hover {
+            background: #dc2626;
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+    <meta>
+    <meta>
+</head>
+
+<body style="overflow-wrap: break-word;">
+
+    <div class="margin-30 main-body">
+
+        <!-- <div class="modal-body"> -->
+        <!-- Document Type -->
+        <div class="form-group">
+            <label class="title">Document Type</label>
+            <select id="documenttypes" onchange="getDocumenttype(event);">
+                <option hidden="">Select Type</option>
+
+            </select>
+        </div>
+        <div id="docMessage"> </div>
+
+        <!-- Document List with multi select option -->
+        <div id="documentContainer" class="form-group" style="display: none">
+            <label class="title">Document List</label>
+            <select id="documentList" multiple=""></select>
+        </div>
+
+        <!-- Showing Other Document textbox-->
+   <div id="otherDocumentContainer" class="form-group" style="display: none;">
+            <label class="title">Other Document</label>
+            <div class="input-wrapper" style="display: flex; flex:1; width: 250px; gap: 8px;">
+                <span id="docListCount">(0)</span></h3>
+    <input type="textbox" id="itemInput" placeholder="Enter the Other Document Name" />
+             <button type="button" class="btn btn-cancel" id="addDocBtn">Add</button>
+            </div>
+             <ol id="itemList"></ol>
+       </div>
+       
+        <!-- Form List with multi select option -->
+        <div id="formsContainer" class="form-group" style="display:none;">
+            <label class="title">Forms List</label>
+            <select id="documentForms" multiple=""></select>
+        </div>
+
+        <div id="codeContainer" style="display:none;">
+            <div class="form-group" style="display:none;">
+                <label class="title">Action Code</label>
+                <select id="actioncodeList" multiple=""></select>
+            </div>
+            <div class="form-group">
+                <label class="title">Reason Code</label>
+                <select id="reasoncodeList" multiple=""></select>
+            </div>
+        </div>
+
+        <!-- Document Count -->
+        <div class="form-group" id="documentCount" style="display: none">
+            <label class="title">Document Count</label>
+            <input type="text" id="docCount" placeholder="Enter count" disabled>
+        </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button id="request" class="btn btn-cancel">Request</button>
+        <button id="cancel" class="btn btn-cancel">Cancel</button>
+    </div>
+    <script>
+
+        const params = new URLSearchParams(window.location.search);
+        const crmparam = parent.Xrm;
+        const recordIds = params.get("data");
+        var documenttypeid = "";
+        var choices = "", formChoices = "", selecteddocuments = [], documentName = "", selectedDocNames = [], documentsList;
+        var selectedForms = [];
+        var selectedFormNames = [];
+        var selectedActionlabels = [], selectedReasonLabels = [];
+        var actioncodeChoices = "", reasoncodeChoices = "";
+        var selectedActionCodes = [], selectedReasonCodes = [];
+        let records = [];
+        if (typeof recordIds === "string" && recordIds.trim().length) {
+            records = recordIds.split(",").map(s => s.trim()).filter(Boolean);
+        }
+        const recordCount = records.length;
+        console.log("records:", records, "count:", recordCount);
+        const primaryRecordId = records[0] || "";
+        let entityName = params.get("entityName");
+        const cancelbtn = document.getElementById("cancel");
+        let examData = false ;
+        let Casetitle;
+        let dpSelectedVal = null;
+       
+        const input = document.getElementById("itemInput");
+        const addBtn = document.getElementById("addDocBtn");
+        const itemList = document.getElementById("itemList");
+        const docListCount = document.getElementById("docListCount");
+        let items = [];
+
+        async function getDocumentTypes() {
+            //var formContext = primaryControl;
+            try {
+                Xrm.Utility.showProgressIndicator("Loading...");
+
+                var entityName = "picts_documenttype";//recordIds.split(" , ")[1]; // or formContext.data.entity.getEntityName()
+                var query = "?$select=picts_documenttypeid,picts_casetype,_createdby_value,_createdonbehalfby_value,createdon,picts_description,picts_documentname,picts_secondremainderdays,statecode";
+
+                const response = await Xrm.WebApi.retrieveMultipleRecords(entityName, query);
+                return response.entities;
+            }
+            catch (error) {
+                console.error("Error:", error.message);
+                throw error;
+            }
+            finally {
+                Xrm.Utility.closeProgressIndicator();
+            }
+        }
+
+        function populateDocumentTypes(caseTitle, documentTypes) {
+            const select = document.getElementById("documenttypes");
+            select.innerHTML = '<option value="">-- Select Document Type --</option>';
+            const filteredDocs = documentTypes.filter(doc => {
+                const docName = doc.picts_documentname || "";
+                if (!doc.picts_casetype) return false;
+                const caseTypes = doc.picts_casetype
+                    .split(",")
+                    .map(v => v.trim());
+
+                // First filter by caseTitle
+                const matchesCase = caseTypes.includes(String(caseTitle.caseTitle));
+                const examdata = String(caseTitle.examnumber);
+                Casetitle = caseTitle.caseTitle;
+                let examnumber = caseTitle.examnumber? caseTitle.examnumber:"";
+                if (examnumber.length>0){
+                    examData = true;
+                }
+                if (!matchesCase) return false;
+                // Normalize fingerprint to string
+                const requiredFingerprint = String(caseTitle.requiredFingerprint);
+                   if(caseTitle.caseTitle === 100000000){
+                //if(caseTitle.caseTitle === 100000001){
+                    // Now handle fingerprint logic for special names
+                    if (doc.picts_documentname === "DP-38 Print" || doc.picts_documentname === "DP-38 No Print") {
+                        // Adjust these values to match your option set codes
+                        if (caseTitle.requiredFingerprint === 100000000) {
+                            // Only keep "print" record
+                            return doc.picts_documentname === "DP-38 Print";
+                        } else if (caseTitle.requiredFingerprint === 100000001) {
+                            // Only keep "noprint" record
+                            return doc.picts_documentname === "DP-38 No Print";
+                        } else if (caseTitle.requiredFingerprint === "null") {
+                            // If fingerprint is null, keep both
+                            return false;
+                        } else {
+                            // If fingerprint is something else, exclude both
+                            return false;
+                        }
+                    }
+                }
+                // For all other records, keep them as-is
+                return true;
+            });
+
+//sorting the filteredDocs array
+            filteredDocs.sort((a, b) => {
+                const matchA = a.picts_documentname.match(/(\d+)(.*)$/);
+                const matchB = b.picts_documentname.match(/(\d+)(.*)$/);
+
+                return (
+                    Number(matchA[1]) - Number(matchB[1]) ||
+                    (matchA[2].trim() ? matchB[2].trim() ? matchA[2].trim().localeCompare(matchB[2].trim()) : 1 : -1)
+                );
+            });
+
+            filteredDocs.forEach(record => {
+                const option = document.createElement("option");
+                option.value = record?.picts_documenttypeid;   // guid here
+                option.text = record?.picts_documentname;         //  text
+                select.appendChild(option);
+            });
+
+        }
+
+        function cancel() {
+            window.close();
+        }
+
+        let documents = [
+            { key: 1, value: "Document A" },
+            { key: 2, value: "Document B" },
+            { key: 3, value: "Document C" },
+            { key: 4, value: "Document D" }
+        ];
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            try {
+                // Run both API calls in parallel
+                const [caseDetails, documentTypes] = await Promise.all([
+                    getCaseType(),
+                    getDocumentTypes()
+                ]);
+
+                populateDocumentTypes(caseDetails, documentTypes);
+                const selectElement = document.getElementById("documentList");
+                const selecttype = document.getElementById("documenttypes");
+                getDocumenttype();
+
+                // Initialize count as 0
+                document.getElementById("docCount").value = 0;
+               
+                /**This is add other multiple documents click event when clicked on add other document button */
+                 // Store all items here
+                   // let items = [];
+                   
+                   // Add button
+                   addDocBtn.addEventListener("click", addItem);
+                   
+                   function addItem() {
+                        const value = input.value.trim();
+
+                        if (value === "") {
+                            return;
+                        }
+
+                        // Add to array
+                        items.push(value);
+
+                        // Display item
+                        renderList();
+
+                        // Clear input
+                        input.value = "";
+                        input.focus();
+                    }
+                   
+                    function deleteItem(index) {
+                        // Remove item from array
+                        items.splice(index, 1);
+
+                        // Re-render list
+                        renderList();
+                    }
+                   
+                    function renderList() {
+                    // Clear existing list
+                    itemList.innerHTML = "";
+                   
+                    // Update count
+                    docListCount.textContent = `(${items.length})`;
+                    updateTotalCount();
+
+                    // Create list again
+                    items.forEach((item, index) => {
+                        const li = document.createElement("li");
+
+                        const container = document.createElement("div");
+                        container.className = "list-item";
+
+                        const text = document.createElement("span");
+                        text.textContent = item;
+
+                        const deleteBtn = document.createElement("button");
+                        deleteBtn.textContent = "✕";
+                        deleteBtn.className = "delete-btn";
+
+                        deleteBtn.addEventListener("click", function () {
+                            deleteItem(index);
+                        });
+
+                        container.appendChild(text);
+                        container.appendChild(deleteBtn);
+
+                        li.appendChild(container);
+                        itemList.appendChild(li);
+                    });
+                }
+               
+                // Enter key
+                input.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        addItem();
+                    }
+                });
+                   
+                /**This is add other multiple documents click event when clicked on add other document button */
+               
+
+                /** This is the cancel button click event triggered when cancel button is clciked */
+                document.getElementById("cancel")
+                    .addEventListener("click", function () {
+                        window.close();
+                    });
+
+                /** This is the request button click event triggered when request is clciked */
+                document.getElementById("request")
+                    .addEventListener("click", function () {
+                // const totalSelected = (selecteddocuments?.length || 0) + (selectedForms?.length || 0);
+
+/** const otherDocVal = document.getElementById("otherDocumentContainer");
+const otherDocInput = otherDocVal.querySelector("input").value;        
+if(window.getComputedStyle(otherDocumentContainer).display !== "none" && !otherDocInput.trim()){
+Xrm.Utility.alertDialog("Please enter the Other Document Name.");
+    return;
+}*/
+               
+                        const otherDocArr = items.map(item => ({
+                                  picts_otherdocname: item
+                             }));
+                             
+                        const totalSelected =
+                            (selecteddocuments?.length || 0) +
+                            (selectedForms?.length || 0) +
+                            (selectedActionCodes?.length || 0) +
+                            (selectedReasonCodes?.length || 0);
+                        if (recordCount > 1) {
+                            if (totalSelected > 1) {
+                                openPreviewForMultipleDoc();
+                            }
+                        } else {
+                            if (totalSelected > 0 && Casetitle === 100000001){
+                               // if (examData){
+                                    Xrm.Utility.showProgressIndicator("Loading..");
+                                    // var docDetails = { "Documents": selecteddocuments, "picts_documenttypeid": documenttypeid, "picts_caseid": recordIds.split(" , ")[0] };
+                                    var docDetails = {
+                                        Documents: [...selecteddocuments, ...selectedForms],
+                                        picts_documenttypeid: documenttypeid,
+                                        picts_caseid: primaryRecordId,
+                                        OtherDocument: otherDocArr  
+                                        //picts_otherdocumentName: otherDocInput                                      
+                                    };
+                                    console.log(docDetails);
+                                 
+                                    var parameters = {
+                                        "DocDetails": JSON.stringify(docDetails),
+                                        "ActionCode": (selectedActionCodes || []).join(","),
+                                        "ReasonCode": (selectedReasonCodes || []).join(",")
+                                    };
+                                    //parameters = docDetails;
+                                    parameters.DocDetails = JSON.stringify(docDetails);
+                                    var req = new XMLHttpRequest();
+                                    req.open("POST", Xrm.Utility.getGlobalContext().getClientUrl() + "/api/data/v9.2/picts_cases(" + primaryRecordId + ")/Microsoft.Dynamics.CRM.picts_CaseCreateDocumentsAndSendEmailPreview", true);
+                                    req.setRequestHeader("OData-MaxVersion", "4.0");
+                                    req.setRequestHeader("OData-Version", "4.0");
+                                    req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                    req.setRequestHeader("Accept", "application/json");
+                                    req.onreadystatechange = function () {
+                                        if (this.readyState === 4) {
+                                            req.onreadystatechange = null;
+                                            if (this.status === 200 || this.status === 204) {
+                                                var result = JSON.parse(this.response);
+                                                // Return Type: mscrm.picts_CaseCreateDocumentsAndSendEmailPreviewResponse
+                                                // Output Parameters
+                                                var emailguid = result["EmailGuid"];
+                                                var formGuid = result["FormGuid"]// Edm.String
+                                                var childRecords = result["ChildRecords"];
+                                                openmailpreview(emailguid, result['UpdateRecord'], formGuid, primaryRecordId,childRecords);
+                                            } else {
+                                                Xrm.Utility.closeProgressIndicator();
+                                                console.log(this.responseText);
+                                            }
+                                        }
+                                    };
+                                    req.send(JSON.stringify(parameters));
+                               // } else {
+                                   // Xrm.Utility.alertDialog("Please select Exam number and try again");
+                               // }
+                            }
+                            else if (totalSelected > 0) {
+                               // Xrm.Utility.showProgressIndicator("Loading..");
+                                // var docDetails = { "Documents": selecteddocuments, "picts_documenttypeid": documenttypeid, "picts_caseid": recordIds.split(" , ")[0] };
+                                var docDetails = {
+                                    Documents: [...selecteddocuments, ...selectedForms],
+                                    picts_documenttypeid: documenttypeid,
+                                    picts_caseid: primaryRecordId,
+                                    OtherDocument: otherDocArr
+                                    //picts_otherdocumentName: otherDocInput
+                                };
+                                console.log(docDetails);
+                             
+                                var parameters = {
+                                    "DocDetails": JSON.stringify(docDetails),
+                                    "ActionCode": (selectedActionCodes || []).join(","),
+                                    "ReasonCode": (selectedReasonCodes || []).join(",")
+                                };
+                                //parameters = docDetails;
+                                parameters.DocDetails = JSON.stringify(docDetails);
+var selectedDocDetails = JSON.parse(parameters.DocDetails);
+ 
+if(selectedDocDetails.picts_documenttypeid == "6dc6bd95-6bc4-f011-bbd2-001dd8096249"){
+  // Show loader only for this condition for 10 seconds
+ 
+                                 Xrm.Utility.showProgressIndicator("Loading attachments...");
+ setTimeout(()=>{
+   var req = new XMLHttpRequest();
+                                req.open("POST", Xrm.Utility.getGlobalContext().getClientUrl() + "/api/data/v9.2/picts_cases(" + primaryRecordId + ")/Microsoft.Dynamics.CRM.picts_CaseCreateDocumentsAndSendEmailPreview", true);
+                                req.setRequestHeader("OData-MaxVersion", "4.0");
+                                req.setRequestHeader("OData-Version", "4.0");
+                                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                req.setRequestHeader("Accept", "application/json");
+                                req.onreadystatechange = function () {
+                                    if (this.readyState === 4) {
+                                        req.onreadystatechange = null;
+                                        if (this.status === 200 || this.status === 204) {
+                                            var result = JSON.parse(this.response);
+                                            // Return Type: mscrm.picts_CaseCreateDocumentsAndSendEmailPreviewResponse
+                                            // Output Parameters
+
+                                            var emailguid = result["EmailGuid"];
+                                            var formGuid = result["FormGuid"]// Edm.String
+                                            var childRecords = result["ChildRecords"];
+                                            openmailpreview(emailguid, result['UpdateRecord'], formGuid, primaryRecordId,childRecords);
+
+
+                                        } else {
+                                            Xrm.Utility.closeProgressIndicator();
+                                            console.log(this.responseText);
+                                        }
+                                    }
+                                };
+                                req.send(JSON.stringify(parameters));
+ },10000);
+ 
+
+}else{
+  // Show loader only for this condition for seconds
+Xrm.Utility.showProgressIndicator("Loading...");
+
+var req = new XMLHttpRequest();
+                                req.open("POST", Xrm.Utility.getGlobalContext().getClientUrl() + "/api/data/v9.2/picts_cases(" + primaryRecordId + ")/Microsoft.Dynamics.CRM.picts_CaseCreateDocumentsAndSendEmailPreview", true);
+                                req.setRequestHeader("OData-MaxVersion", "4.0");
+                                req.setRequestHeader("OData-Version", "4.0");
+                                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                req.setRequestHeader("Accept", "application/json");
+                                req.onreadystatechange = function () {
+                                    if (this.readyState === 4) {
+                                        req.onreadystatechange = null;
+                                        if (this.status === 200 || this.status === 204) {
+                                            var result = JSON.parse(this.response);
+                                            // Return Type: mscrm.picts_CaseCreateDocumentsAndSendEmailPreviewResponse
+                                            // Output Parameters
+
+                                            var emailguid = result["EmailGuid"];
+                                            var formGuid = result["FormGuid"]// Edm.String
+                                            var childRecords = result["ChildRecords"];
+                                            openmailpreview(emailguid, result['UpdateRecord'], formGuid, primaryRecordId,childRecords);
+
+
+                                        } else {
+                                            Xrm.Utility.closeProgressIndicator();
+                                            console.log(this.responseText);
+                                        }
+                                    }
+                                };
+                                req.send(JSON.stringify(parameters));
+}
+                               
+                            } else {
+                                Xrm.Utility.alertDialog("Please select atleast one document and try again");
+                            }
+                        }
+                    });
+            }
+            catch (error) {
+                console.error("Initialization error:", error);
+            }
+        });
+
+        function openPreviewForMultipleDoc() {
+            var data = {              
+                picts_requesteddocumenttype: documentName,
+                picts_requesteddocumentslist: [...selectedDocNames, ...selectedFormNames],
+                picts_actioncodestext: selectedActionlabels? selectedActionlabels : [],
+                picts_reasoncodestext: selectedReasonLabels? selectedReasonLabels : []
+            }
+            const payload = {
+                data: data,
+                records: records,
+                documentType: documenttypeid
+            };
+
+            const pageInput = {
+                pageType: "webresource",
+                webresourceName: "picts_multi_document_preview.html",
+                data: JSON.stringify(payload),
+            };
+
+            const navigationOptions = {
+                target: 2,
+                position: 1,
+                width: { value: 70, unit: "%" },
+                height: { value: 80, unit: "%" },
+                title: "Request Document Preview"
+            };
+
+            Xrm.Navigation.navigateTo(pageInput, navigationOptions).then(function () {
+                Xrm.Utility.refreshParentGrid();
+            })
+        }
+
+        async function openmailpreview(emailGuid, updateRecId, updateFormRec, primaryRecordId,childRecords) {
+
+            const childRecordIds = childRecords.split(",");
+            GuidId = primaryRecordId;
+            var pageInput = {
+                pageType: "entityrecord",
+                entityName: "email", // Replace with your entity name
+                entityId: emailGuid // Optional: specify a form ID if needed
+            };
+
+            var navigationOptions = {
+                target: 2, // Modal dialog
+                position: 1, // Center
+                width: { value: 80, unit: "%" },
+                height: { value: 90, unit: "%" }
+            };
+
+            Xrm.Navigation.navigateTo(pageInput, navigationOptions).then(
+                async function success() {
+                    try {
+                        Xrm.Utility.showProgressIndicator("Loading...");
+                        // Get email status after popup closes
+                        const email = await Xrm.WebApi.retrieveRecord(
+                            "email",
+                            emailGuid,
+                            "?$select=statuscode"
+                        );
+                        if (email.statuscode !== 1) {
+                            // await Xrm.Navigation.openAlertDialog({
+                            //     text: "Email sent successfully."
+                            // });
+                            handleCloseLogic(updateRecId, true, updateFormRec , GuidId, childRecordIds )
+
+                        } else {
+                            // User closed without sending
+                            handleCloseLogic(updateRecId, false, updateFormRec, GuidId,childRecordIds );
+                        }
+                        // window.close();
+                        // closeAllPopupsAndRefresh();
+                    } catch (error) {
+                        Xrm.Utility.closeProgressIndicator();
+                        console.error("Error checking email status:", error);
+                    }
+                },
+                function error(error) {
+                    Xrm.Utility.closeProgressIndicator();
+                    console.error("Error opening modal form:", error.message);
+                }
+            );
+        }
+
+
+        async function handleCloseLogic(updateRecId, updateStatus, updateFormRec, GuidId,childRecordIds) {
+            try {
+                const selectedDocumentsArr = childRecordIds;
+                var entityLogicalName = "picts_documents";
+                var formEntityName = "picts_requiredforms";
+               
+                var entityName = "picts_documentuploads";
+       var documentStatus = {
+ "picts_documentstatus": 100000002
+}
+                var status, formStatus;
+                if (updateStatus) {
+                   // status = 100000002;
+                       status = 100000000;
+                    var entity = {};
+                    entity["picts_substatus"] = 100000014; // Replace with your desired status value
+                    // Xrm.WebApi.updateRecord("picts_case", GuidId, entity).then(
+                    //     function success(result) {
+                    //         console.log("Record updated successfully:", result);
+                    //         Xrm.Utility.openEntityForm("picts_case", GuidId);
+                    //     },
+                    //     function(error) {
+                    //         console.log("Error updating record:", error.message);
+                    //     }
+                    // );
+
+                        if(dpSelectedVal !== "90c21ee3-e0bf-f011-bbd2-001dd83070a4"){
+ selectedDocumentsArr.forEach((item)=>{  
+                        Xrm.WebApi.updateRecord(entityName, item,documentStatus).then(
+                         function success(result) {
+                          console.log("Record updated successfully:", result);
+                         },
+                         function(error) {
+                           console.log("Error updating record:", error.message);
+                        }
+                     );
+});
+}
+                       
+                   
+                }
+
+                               // var date = new Date();
+var date = new Date().toLocaleString("en-US", {
+timeZone: "America/New_York"
+});
+                var count = 0;
+                var data = {
+                    "picts_status": status                
+                };
+                var formData = {
+                    "picts_status": status,
+                };
+
+                if (updateStatus) {
+                    data["picts_documentrequesteddate"] = date;
+                    data["picts_createdon"]=date;
+                    formData["picts_formrequesteddate"] = date;
+                }
+
+                if(selecteddocuments.length > 0){
+                 await updateDocumentStatus(entityLogicalName, updateRecId, data);
+               }
+               // await updateDocumentStatus(entityLogicalName, updateRecId, data);
+
+                await updateFormStatus(formEntityName, updateFormRec, formData);
+
+                 if (Xrm.Utility && Xrm.Utility.refreshParentGrid) {
+                     var lookupOptions = {
+                         entityType: entityLogicalName,
+                         id: primaryRecordId
+                     };
+                     var lookupFormOptions = {
+                         entityType: formEntityName,
+                         id: primaryRecordId
+                     };
+                     Xrm.Utility.refreshParentGrid(lookupOptions);
+                     Xrm.Utility.refreshParentGrid(lookupFormOptions);
+                 }
+
+                Xrm.Utility.closeProgressIndicator();
+                window.close();
+               setTimeout(function () {
+                    closeAllPopupsAndRefresh();
+                }, 500);
+            } catch (error) {
+                console.error("Execution error: " + error.message);
+                Xrm.Utility.closeProgressIndicator();
+            }
+
+        };
+
+          async function updateDocumentStatus(entityLogicalName, updateRecId, data) {
+            try {
+                await Xrm.WebApi.updateRecord(entityLogicalName, updateRecId, data);
+               console.log("Document updated successfully: " + updateRecId);
+            } catch (error) {
+                console.error("Error updating document: " + error.message);
+               throw error;
+            }
+        }
+
+        async function updateFormStatus(formEntityName, updateFormRecs, formData) {
+
+            if (!updateFormRecs) {
+                console.log("No Form IDs found to update");
+                return;
+            }
+
+            var ids = updateFormRecs.split(",");
+
+            for (let id of ids) {
+
+                try {
+                    await Xrm.WebApi.updateRecord(formEntityName, id.trim(), formData);
+                    console.log("Form updated successfully: " + id);
+                } catch (error) {
+                    console.error("Error updating form: " + error.message);
+                    throw error;
+                }
+            }
+        }
+
+        function closeAllPopupsAndRefresh() {
+            try {
+                // Refresh main grid
+                if (parent && parent.Xrm) {
+                    parent.Xrm.Page.data.refresh();
+                }
+                // Close email preview popup
+                window.close();
+                // Close parent popup (document popup)
+                if (parent && parent !== window) {
+                    parent.window.close();
+                }
+
+                // Refresh home grid if opened from view
+                if (parent && parent.location) {
+                    parent.location.reload();
+                }
+            } catch (e) {
+                console.log("Handled popup closing");
+            }
+        }
+
+        async function getCaseType() {
+            const caseRecord = await Xrm.WebApi.retrieveRecord("picts_case", primaryRecordId, "?$select=picts_casetitle,picts_requiredfingerprint,_picts_examnumber_value");
+            console.log("Document List", caseRecord.picts_casetitle);
+            console.log("Required Fingerprint:", caseRecord.picts_requiredfingerprint);
+            console.log("examnumber" , caseRecord._picts_examnumber_value);
+            return { caseTitle: caseRecord.picts_casetitle, requiredFingerprint: caseRecord.picts_requiredfingerprint,examnumber: caseRecord._picts_examnumber_value };
+        }
+
+
+        /** This function is used to get selected document type*/
+        function getDocumenttype() {
+            const select = document.getElementById("documenttypes");
+            selecteddocuments.length = 0;
+            selectedForms.length = 0;
+            document.getElementById("request").style.display = "none"
+
+            select.addEventListener("change", function (event) {
+                const selectedValue = event.target.value;
+                const selectedText = event.target.options[event.target.selectedIndex].text;
+                documentName = selectedText;
+                documenttypeid = selectedValue;
+             
+                if (selectedValue === "90c21ee3-e0bf-f011-bbd2-001dd83070a4" || selectedValue === "f444be0f-2da5-f111-b8dd-001dd806de07" || selectedValue === "d991d8c1-cfa6-f111-b8dd-001dd80de0d1") {
+                    // Hide existing
+                    document.getElementById("documentList").parentElement.style.display = "none";
+                    document.getElementById("formsContainer").style.display = "none";
+                    document.getElementById("documentContainer").style.display = "none";
+                    document.getElementById("docMessage").style.display = "none";
+                    document.getElementById("otherDocumentContainer").style.display = "none";
+                    // Show codes
+                    document.getElementById("codeContainer").style.display = "block";
+                    document.getElementById("documentCount").style.display = "none";
+                    dpSelectedVal = selectedValue;
+
+                    initializeCodeDropdowns();
+
+                } else {
+                    if (documentName === "DP-287"){                        
+                    document.getElementById("documentList").parentElement.style.display = "none";
+                    document.getElementById("documentCount").style.display = "none";
+                    document.getElementById("documentContainer").style.display = "none";
+                    // Hide codes
+                    document.getElementById("codeContainer").style.display = "none";
+                    document.getElementById("otherDocumentContainer").style.display = "block";
+                    getDocumentList(selectedValue);
+                    }
+                    else{
+                    // Show existing
+                    document.getElementById("documentList").parentElement.style.display = "flex";
+                    document.getElementById("documentCount").style.display = "flex";
+                    document.getElementById("documentContainer").style.display = "flex";
+                    document.getElementById("otherDocumentContainer").style.display = "flex";
+                    // Hide codes
+                    document.getElementById("codeContainer").style.display = "none";
+                   
+                    // Clear the displayed list
+                       document.getElementById("itemList").innerHTML = "";
+                    // Reset added other document count
+                       docListCount.textContent = "(0)";
+                    // Clear the array
+                       items = [];
+                       
+                    getDocumentList(selectedValue);
+                }
+                }
+if(selectedValue === ""){
+document.getElementById("documentContainer").style.display = "none";
+   document.getElementById("documentCount").style.display = "none";
+document.getElementById("otherDocumentContainer").style.display = "none";
+                       
+                        // Clear the displayed list
+                        document.getElementById("itemList").innerHTML = "";
+                        // Reset added other document count
+                        docListCount.textContent = "(0)";
+                        // Clear the array
+                        items = [];
+}
+
+            });
+        }
+
+        async function initializeCodeDropdowns() {
+
+            const acodeEl = document.getElementById("actioncodeList");
+            const rcodeEl = document.getElementById("reasoncodeList");
+            document.getElementById("docCount").value = 0;
+
+            if (!actioncodeChoices) {
+                actioncodeChoices = new Choices(acodeEl, {
+                    placeholderValue: "Select Action Codes",
+                    removeItemButton: true,
+                    searchEnabled: true,
+                    closeDropdownOnSelect: false,
+                    renderSelectedChoices: 'always'
+                });
+
+                acodeEl.addEventListener("change", () => {
+                    selectedActionCodes = actioncodeChoices.getValue(true);
+                    let raw = actioncodeChoices.getValue() || [];
+
+                    let selectedActionCodeLabels = selectedActionCodes.map(val => {
+                        const match = Array.isArray(raw) ? raw.find(item => {
+                            if (typeof item === 'string') return item === val;
+                            return (item.value === val) || (item.id === val);
+                        }) : null;
+                        return match ? (match.label ?? match.value) : val;
+                    });
+                    selectedActionlabels = selectedActionCodeLabels;
+                    updateCount();
+                });
+            }
+
+            if (!reasoncodeChoices) {
+                reasoncodeChoices = new Choices(rcodeEl, {
+                    placeholderValue: "Select Reason Codes",
+                    removeItemButton: true,
+                    searchEnabled: true,
+                    closeDropdownOnSelect: false,
+                    renderSelectedChoices: 'always'
+                });
+
+                rcodeEl.addEventListener("change", () => {
+                    selectedReasonCodes = reasoncodeChoices.getValue(true);
+                    let rawReasons = reasoncodeChoices.getValue() || [];
+
+                    let selectedReasonCodeLabels = selectedReasonCodes.map(val => {
+                        const match = Array.isArray(rawReasons) ? rawReasons.find(item => {
+                            if (typeof item === 'string') return item === val;
+                            return (item.value === val) || (item.id === val);
+                        }) : null;
+                        return match ? (match.label ?? match.value) : val;
+                    });
+                    selectedReasonLabels = selectedReasonCodeLabels;
+                    updateCount();
+                });
+            }
+
+            function updateCount() {
+            const actioncode = selectedActionCodes.length || 0;
+            const reasoncode = selectedReasonCodes.length || 0;
+
+            const totalSelected = actioncode + reasoncode;
+            if (totalSelected === 0){
+                document.getElementById("request").style.display = "none"
+            }
+            else{
+                document.getElementById("request").style.display = "block"
+            }
+        }
+
+            try {
+
+                Xrm.Utility.showProgressIndicator("Loading Codes...");
+
+                // Fetch Action Codes
+                const fetchXml = `<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+                                    <entity name="picts_recommendationsactioncodes">
+                                    <attribute name="picts_recommendationsactioncodesid" />
+                                    <attribute name="picts_name" />
+                                    <attribute name="createdon" />
+                                    <order attribute="picts_name" descending="false" />
+                                    <filter type="and">
+                                    <condition attribute="statecode" operator="eq" value="0" />
+                                    </filter>
+                                    </entity>
+                                </fetch>`;
+                const actionResponse = await Xrm.WebApi.retrieveMultipleRecords(
+                    "picts_recommendationsactioncodes",
+                    "?fetchXml=" + encodeURIComponent(fetchXml)
+                );
+
+                const actionData = actionResponse.entities.map(item => ({
+                    value: item.picts_recommendationsactioncodesid,
+                    label: item.picts_name
+                }));
+
+                const fetch1 = `<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+                                    <entity name="picts_recommendationsreasoncodes">
+                                    <attribute name="picts_recommendationsreasoncodesid" />
+                                    <attribute name="picts_name" />
+                                    <attribute name="createdon" />
+                                    <order attribute="picts_name" descending="false" />
+                                    <filter type="and">
+                                    <condition attribute="picts_reasoncodestatus" operator="eq" value="100000000" />
+                                    </filter>
+                                    </entity>
+                                </fetch>`;
+
+                //Fetch Reason Codes
+                const reasonResponse = await Xrm.WebApi.retrieveMultipleRecords(
+                    "picts_recommendationsreasoncodes",
+                    "?fetchXml=" + encodeURIComponent(fetch1)
+                );
+
+                const reasonData = reasonResponse.entities.map(item => ({
+                    value: item.picts_recommendationsreasoncodesid,
+                    label: item.picts_name
+                }));
+
+                // Clear old data
+                actioncodeChoices.clearStore();
+                reasoncodeChoices.clearStore();
+
+                actioncodeChoices.setChoices(
+                    [{ value: "", label: "No documents available", disabled: true }],
+                    "value",
+                    "label",
+                    true
+                );
+
+                reasoncodeChoices.setChoices(
+                    [{ value: "", label: "No documents available", disabled: true }],
+                    "value",
+                    "label",
+                    true
+                );
+
+                // Set new data
+                actioncodeChoices.setChoices(actionData, "value", "label", true);
+                reasoncodeChoices.setChoices(reasonData, "value", "label", true);
+
+            } catch (error) {
+
+                console.error("Error loading codes:", error);
+
+            } finally {
+
+                Xrm.Utility.closeProgressIndicator();
+
+            }
+        }
+
+
+        /** This function is used to get selected document type related document list */
+        async function getDocumentList(id) {
+            try {
+                Xrm.Utility.showProgressIndicator("Loading...");
+                var entityName = "picts_documentconfiguration"; // or formContext.data.entity.getEntityName()
+                var query = "?$filter=_picts_documenttype1_value eq " + id;
+                const response = await Xrm.WebApi.retrieveMultipleRecords(entityName, query);
+                let configs = response.entities;
+                console.log(configs,'1:::configs');
+                if (recordCount === 1) {
+                    const existingDocuments = await getDocumentUploadedRecords(id);
+                      console.log(existingDocuments,'existingDocuments');
+                    // Remove matches from configs
+ configs = configs.filter(config => {
+if (config.picts_documentname === "Other Document") {
+return true;
+}
+
+return !existingDocuments.includes(config.picts_documentconfigurationid);
+});
+                    console.log(configs);
+
+                    if (!configs || configs.length === 0) {
+                        const msg = document.getElementById("docMessage");
+
+                        msg.style.display = "block";
+                        msg.innerText = "All documents for this type have already been Requested.";
+
+                        const formsContainer = document.getElementById("formsContainer");
+                        if (formsContainer) formsContainer.style.display = "none";
+
+                 const otherDocumentContainer = document.getElementById("otherDocumentContainer");
+        if (otherDocumentContainer) otherDocumentContainer.style.display = "none";
+
+                        if (choices) choices.clearStore();
+                        if (formChoices) formChoices.clearStore();
+
+                        document.getElementById("request").disabled = true;
+
+                        document.getElementById("docCount").value = 0;
+
+                        return;
+                    }
+
+                    document.getElementById("docMessage").style.display = "none";
+                    document.getElementById("request").disabled = false;
+                }
+                const docs = configs.filter(x => x.picts_type === 100000000);
+                const forms = configs.filter(x => x.picts_type === 100000001);
+
+                populateDocuments(docs);
+
+                const formsContainer = document.getElementById("formsContainer");
+
+                if (forms.length > 0) {
+                    formsContainer.style.display = "flex";
+                    populateForms(forms);
+                } else {
+                    formsContainer.style.display = "none";
+                }
+            }
+            catch (error) {
+                const formsContainer = document.getElementById("formsContainer");
+                if (formsContainer) formsContainer.style.display = "none";
+                if (choices) choices.clearStore();
+                if (formChoices) formChoices.clearStore();
+                document.getElementById("docCount").value = 0;
+                console.error("Error:", error.message);
+                throw error;
+            }
+            finally {
+                Xrm.Utility.closeProgressIndicator();
+            }
+        }
+
+        async function getExistingDocuments(primaryRecordId, id) {
+
+            const query = `?$select=_picts_documenttype1_value&$filter=picts_caseid eq ${primaryRecordId}&filter=_picts_documenttype1_value eq ${id}`;
+
+            const response = await Xrm.WebApi.retrieveMultipleRecords(
+                "picts_documents",
+                query
+            );
+
+            return response.entities.map(x => x._picts_documenttype1_value);
+
+        }
+
+        async function getDocumentUploadedRecords(id) {
+
+            const fetchXml = `<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+                                <entity name="picts_documentuploads">
+                                    <attribute name="picts_documentuploadsid"/>
+                                    <attribute name="picts_name"/>
+                                    <attribute name="createdon"/>
+                                    <attribute name="picts_documentlist"/>
+                                    <order attribute="picts_name" descending="false"/>
+                                    <filter type="and">
+                                        <condition attribute="picts_case" operator="eq" uiname="004117-26" uitype="picts_case" value="{${primaryRecordId}}"/>
+                                        <condition attribute="picts_documentstatus" operator="not-null"/>
+                                    </filter>
+                                    <link-entity name="picts_documents" from="picts_documentsid" to="picts_document" link-type="inner" alias="ag">
+                                        <filter type="and">
+                                            <condition attribute="picts_documenttype1" operator="eq" uiname="DP-38 No Print" uitype="picts_documenttype" value="{${id}}"/>
+                       <condition attribute="picts_status" operator="ne" value="100000003" />
+                                        </filter>
+                                    </link-entity>
+                                </entity>
+                            </fetch>`;
+            const result = await Xrm.WebApi.retrieveMultipleRecords(
+                "picts_documentuploads",
+                "?fetchXml=" + encodeURIComponent(fetchXml)
+            );
+            console.log('result::entities',result.entities.map(x => x._picts_documentlist_value));
+            return result.entities.map(x => x._picts_documentlist_value);
+
+        }
+
+        function populateDocuments(documents) {
+            const selectElement = document.getElementById("documentList");
+
+            if (!choices) {
+                choices = new Choices(selectElement, {
+                    removeItemButton: true,
+                    searchEnabled: false,
+                    closeDropdownOnSelect: false,
+                    renderSelectedChoices: 'always'
+                });
+
+                selectElement.addEventListener('change', updateSelectedDocuments);
+            }
+
+            choices.clearStore();
+            choices.setChoices(
+                [{ value: "", label: "No documents available", disabled: true }],
+                "value",
+                "label",
+                true
+            );
+            selectElement.innerHTML = "";
+            const formattedData = documents.map(doc => ({
+                value: doc.picts_documentconfigurationid,
+                label: doc.picts_documentname,
+                selected: true
+            }));
+            choices.setChoices(formattedData, 'value', 'label', true);
+            updateSelectedDocuments();
+        }
+
+        function populateForms(forms) {
+            const filteredForms = forms.filter(f => f.picts_casetype === "100000002");
+            if (filteredForms.length > 0) {
+            const selectElement = document.getElementById("documentForms");
+            if (!formChoices) {
+                formChoices = new Choices(selectElement, {
+                    removeItemButton: true,
+                    searchEnabled: false,
+                    closeDropdownOnSelect: false,
+                    renderSelectedChoices: 'always'
+                });
+
+                selectElement.addEventListener('change', updateSelectedForms);
+            }
+            formChoices.clearStore();
+            formChoices.setChoices(
+                [{ value: "", label: "No documents available", disabled: true }],
+                "value",
+                "label",
+                true
+            );
+            selectElement.innerHTML = "";
+            const formattedData = forms.map(doc => ({
+                value: doc.picts_documentconfigurationid,
+                label: doc.picts_documentname,
+                selected: true
+            }));
+            formChoices.setChoices(formattedData, 'value', 'label', true);
+            updateSelectedForms();}
+            else{
+                const selectElement = document.getElementById("documentForms");
+            if (!formChoices) {
+                formChoices = new Choices(selectElement, {
+                    removeItemButton: true,
+                    searchEnabled: false,
+                    closeDropdownOnSelect: false,
+                    renderSelectedChoices: 'always'
+                });
+
+                selectElement.addEventListener('change', updateSelectedForms);
+            }
+            formChoices.clearStore();
+            formChoices.setChoices(
+                [{ value: "", label: "No documents available", disabled: true }],
+                "value",
+                "label",
+                true
+            );
+            selectElement.innerHTML = "";
+            const formattedData = forms.map(doc => ({
+                value: doc.picts_documentconfigurationid,
+                label: doc.picts_documentname
+            }));
+            formChoices.setChoices(formattedData, 'value', 'label', true);
+            updateSelectedForms();
+            }
+        }
+
+        function updateSelectedDocuments() {
+           
+            let selected = choices.getValue(true) || [];
+            let raw = choices.getValue() || [];
+
+            let selectedLabels = selected.map(val => {
+                const match = Array.isArray(raw) ? raw.find(item => {
+                    if (typeof item === 'string') return item === val;
+                    return (item.value === val) || (item.id === val);
+                }) : null;
+                return match ? (match.label ?? match.value) : val;
+            });
+            selectedDocNames = selectedLabels;
+            console.log(selectedDocNames,'selectedDocNames');
+
+             const isOtherDocExist = selectedDocNames.includes("Other Document");
+
+if(isOtherDocExist){
+document.getElementById("otherDocumentContainer").style.display = "flex";
+  }else{
+document.getElementById("otherDocumentContainer").style.display = "none";
+docListCount.textContent = 0;
+}
+            selecteddocuments = selected.map(guid => ({
+                "picts_documentlistid": guid
+            }));
+
+            updateTotalCount();
+        }
+
+        function updateSelectedForms() {
+
+            let selected = formChoices.getValue(true) || [];
+            let raw = formChoices.getValue() || [];
+            let selectedLabels = selected.map(val => {
+                const match = raw.find(item => item.value === val);
+                return match ? match.label : val;
+            });
+            selectedFormNames = selectedLabels;
+            selectedForms = selected.map(guid => ({
+                "picts_documentlistid": guid
+            }));
+            updateTotalCount();
+        }
+
+        function updateTotalCount() {
+            const docCount = selecteddocuments.length || 0;
+            const formCount = selectedForms.length || 0;
+            const otherDocCount = Number(docListCount.textContent.replace(/[()]/g, ''));
+           
+            console.log(docListCount,'otherDocumentListCount');
+
+            //const totalSelected = docCount + formCount;
+              const totalSelected = docCount + formCount + otherDocCount;
+
+            document.getElementById("docCount").value = totalSelected;
+            if (totalSelected === 0){
+                document.getElementById("request").style.display = "none"
+            }
+            else{
+                document.getElementById("request").style.display = "block"
+            }
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+</body>
+
+</html>
