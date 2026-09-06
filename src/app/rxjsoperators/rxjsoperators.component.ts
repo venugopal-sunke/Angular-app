@@ -4,14 +4,12 @@ import { UserPipe } from '../models/datamodel';
 import { headermenus } from '../mocks/menus';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpusersService } from '../services/httpusers.service';
-import { CommonModule } from '@angular/common';
-
 @Component({
     selector: 'app-rxjsoperators',
     templateUrl: './rxjsoperators.component.html',
     styleUrls: ['./rxjsoperators.component.css'],
     standalone: true,
-    imports: [CommonModule, FormsModule, ReactiveFormsModule]
+    imports: [FormsModule, ReactiveFormsModule]
 })
 export class RxjsoperatorsComponent implements OnInit, OnDestroy{
 

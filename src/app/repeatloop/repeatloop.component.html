@@ -14,21 +14,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let detail of details; let i = index">
-                        <td>{{i}}</td>
+                    @for (detail of details; track $index) {
+                    <tr>
+                        <td>{{$index}}</td>
                         <td>{{detail.name}}</td>
                         <td>{{detail.designation}}</td>
                         <td>{{detail.place}}</td>
                         <td>{{detail.experience}}</td>
                     </tr>
+                }
                 </tbody>
             </table>
 
-
             <div>
-                <ul *ngFor="let product of products">
-                    <li *ngFor="let tech of product.tech">{{tech.name}}:: {{tech.profession}}</li>
-                </ul>
+                @for (product of products; track $index) {
+                    <ul>
+                        @for (tech of product.tech; track $index) {
+                            <li>
+                                {{ tech.name }}:: {{ tech.profession }}
+                            </li>
+                        }
+                    </ul>
+                }
             </div>
 
             <p><strong>You don’t have to build Angular forms in the constructor. In fact, it’s usually better not to.</strong></p>
@@ -74,24 +81,34 @@
             </mat-card>
 
             <ul>
-                <li *ngFor="let user of userData">
+                @for (user of userData; track $index) {
+                 <li>
                     <span>{{user.username}}::</span> <span>{{user.designation}}::</span> <span>{{user.place}}::</span>
                     <span>{{user.experience}}</span>
-                </li>
+                 </li>
+                }
             </ul>
 
             <p><b>Cascading Dropdown</b></p>
 
             <select aria-label="country" #mySelect (change)="selectVal(mySelect.value)">
                 <option>Select Country</option>
-                <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                @for (country of countries; track country.id) {
+                    <option [value]="country.id">
+                    {{ country.name }}
+                    </option>
+                }
             </select>
             <br><br>
             <!-- <div *ngIf="countryId > 0"> -->
 
             <select aria-label="city">
                 <option>Please Select City</option>
-                <option *ngFor="let city of cityNames">{{city}}</option>
+                @for (city of cityNames; track $index) {
+                    <option>
+                    {{ city }}
+                    </option>
+                }
             </select>
             <!-- </div> -->
             <br><br>
@@ -100,39 +117,58 @@
             <h3>To make the default value as selected from ts file</h3>
             <select aria-label="label for the select" name="cars" id="cars" [(ngModel)]="selectedCar">
                 <option>Please Select</option>
-                <option *ngFor="let car of cars" [value]="car.id">{{car.name}}</option>
+                @for (car of cars; track car.id) {
+                    <option [value]="car.id">
+                    {{ car.name }}
+                    </option>
+                }
             </select>
             <br>
             <h3>Selected Car Id:{{selectedCar}}</h3>
             <br>
 
             <ul>
+                @for (user of users; track user.id; let i = $index) {
                 <li [matTooltip]="user.age > 21 ? red : user.age == 20 ? green : yellow"
-                    [ngClass]="{user1: user.age > 21, user2: user.age == 20, user3: user.age == 21}"
-                    *ngFor="let user of users; let i=index;">{{user.id}}::{{user.name}}::{{user.age}}
+                    [ngClass]="{user1: user.age > 21, user2: user.age == 20, user3: user.age == 21}">
+                    {{user.id}}::{{user.name}}::{{user.age}}
                     <button type="button" (click)="deleteRow(i)">Delete</button>
                 </li>
+            }
             </ul>
 
             <p><b>Looping object</b></p>
-            <div *ngFor="let item of myObject | keyvalue">
-                Key: <b>{{item.key}}</b>::::::Value: <b>{{item.value}}</b>
+            @for (item of myObject | keyvalue; track item.key) {
+            <div>
+                Key: <b>{{ item.key }}</b>
+                ::::::
+                Value: <b>{{ item.value }}</b>
             </div>
+            }
+
             <br><br>
             <p>When we ever want to use same data in different places of the same component. 
                 we can use below approach to handle data redundancy. To improve code quality
             </p>
-            <div *ngIf="isCertsToggle">
-              <div *ngFor="let user of users1">
-                  <ng-container *ngTemplateOutlet="variantProperties; context:{value:user}"></ng-container>
-              </div>
-            </div>
+
+            @if (isCertsToggle) {
+            @for (user of users1; track user.id) {
+                <ng-container
+                *ngTemplateOutlet="
+                    variantProperties;
+                    context: { value: user }
+                "
+                ></ng-container>
+            }
+            }
             
         </div>
 
         <ng-template #variantProperties let-ele="value">
-              <span>{{ele.id}}</span>
-              <span *ngIf="testMyFun(ele.id)">Testing data</span>
+        <span>{{ ele.id }}</span><br>
+        @if (testMyFun(ele.id)) {
+            <span>Testing data</span>
+        }
         </ng-template>
     </div>
 </div>

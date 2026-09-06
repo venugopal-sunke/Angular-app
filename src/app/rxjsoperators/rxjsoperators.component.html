@@ -34,9 +34,10 @@
 
             <p>Pluck Operator : It is deprecated in this angular version</p>
             <ul>
-                <li *ngFor="let city of pluckObs">{{city}}</li>
+                @for (city of pluckObs; track $index) {
+                    <li>{{city}}</li>
+                }
             </ul>
-
             <p>Distinct operator will give all the values that are distinct when compared
                 with the previous value.
             </p>

@@ -18,13 +18,13 @@
       <p>{{countVal}}</p>
 
       <h3>Implemented ng-container and ng-template</h3>
-      <ng-container *ngIf="menuItem.template">
+      @if (menuItem.template) {
         <ng-container *ngTemplateOutlet="menuItem.template"></ng-container>
-      </ng-container>
+     }
 
       <h2>Converting Celsius to Farenheit and vice versa</h2>
       <section>
-        <label>Celsius:</label>
+        <label for="celsius">Celsius:</label>
         <input
           type="number"
           [(ngModel)]="ctemperature"
@@ -34,7 +34,7 @@
       </section>
       
       <section>
-        <label>Farenheit:</label>
+        <label for="farenheit">Farenheit:</label>
         <input
           type="number"
           #boxF

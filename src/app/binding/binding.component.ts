@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -7,7 +6,7 @@ import { FormsModule } from '@angular/forms';
     templateUrl: './binding.component.html',
     styleUrls: ['./binding.component.css'],
     standalone: true,
-    imports: [CommonModule, FormsModule]
+    imports: [FormsModule]
 })
 export class BindingComponent implements OnInit {
 

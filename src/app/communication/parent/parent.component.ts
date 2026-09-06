@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, inject } from '@angular/core';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { ChildComponent } from '../child/child.component';
-import { CommonModule } from '@angular/common';
 import { ChildoneComponent } from "../childone/childone.component";
 
 @Component({
@@ -9,7 +8,7 @@ import { ChildoneComponent } from "../childone/childone.component";
     templateUrl: './parent.component.html',
     styleUrls: ['./parent.component.css'],
     standalone: true,
-    imports: [ChildComponent, CommonModule, ChildoneComponent]
+    imports: [ChildComponent, ChildoneComponent]
 })
 export class ParentComponent implements OnInit, AfterViewInit{
 

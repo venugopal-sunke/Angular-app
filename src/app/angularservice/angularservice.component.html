@@ -16,15 +16,17 @@
                        </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of users; let i=index">
+                   @for (user of users; track user.id; let i = $index) {
+                    <tr>
                         <td>{{i+1}}</td>
                         <td>{{user.id}}</td>
                         <td>{{user.name | uppercase}}</td>
                         <td>{{user.city | titlecase}}</td>
                         <td>{{user.salary | currency: "INR"}}</td>
                         <td>{{user.dob | date }}</td>
-                        <td>{{ user.dob | age }}</td>
+                        <td>{{user.dob | age }}</td>
                     </tr>
+                 }
                 </tbody>
             </table>
 
@@ -49,7 +51,8 @@
                     </tr>
                    </thead>
                    <tbody>
-                    <tr *ngFor="let info of userInfo | searchFilter : searchData">
+                    @for (info of (userInfo | searchFilter: searchData); track info.id) {
+                    <tr>
                         <td>{{ info.id }}</td>
                         <td>{{ info.name }}</td>
                         <td>{{ info.username }}</td>
@@ -60,6 +63,7 @@
                         <td>{{ info.address.geo.lat }}</td>
                         <td>{{ info.company.name }}</td>
                     </tr>
+                    }
                    </tbody>
             </table>
 
@@ -69,7 +73,7 @@
             <h4>Angular https services with pagination</h4>
             <b>In order to implement pagination from client side. We have to install the command 
                 npm install ngx-pagination --save and import import NgxPaginationModule  from ngx-pagination
-                in app.modulet.ts
+                in app.module.ts
             </b>
             <br><br><br>
 
@@ -83,22 +87,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let comments of userComments | paginate: {id: 'coll', itemsPerPage: 10, currentPage: p}">
-                      <td>{{ comments.id }}</td>
-                      <td>{{ comments.name | uppercase }}</td>
-                      <td>{{ comments.email | lowercase}}</td>
-                      <td>{{ comments.body | titlecase}}</td>
+                    @for (
+                            comments of (userComments | paginate: {
+                                id: 'coll',
+                                itemsPerPage: 10,
+                                currentPage: p
+                            });
+                            track comments.id
+                            ) {                 
+                    <tr>
+                        <td>{{ comments.id }}</td>
+                        <td>{{ comments.name | uppercase }}</td>
+                        <td>{{ comments.email | lowercase }}</td>
+                        <td>{{ comments.body | titlecase }}</td>
                     </tr>
+                }
                 </tbody>
             </table>
             <pagination-controls id='coll' (pageChange)="p = $event"></pagination-controls>
 
             <h3>Displaying the data in Modal Dialog</h3>
             <ul class="showUser">
-                <li *ngFor="let user of userInfo" (click)="showUserInfo(user);">
+                <!-- <li *ngFor="let user of userInfo" (click)="showUserInfo(user);">
                   <span>{{user.id}}</span>
                   <span>{{user.name}}</span>
+                </li> -->
+                @for (user of userInfo; track user.id) {
+                <li (click)="showUserInfo(user)">
+                    <span>{{ user.id }}</span>
+                    <span>{{ user.name }}</span>
                 </li>
+                }
             </ul>
 
             <b>get isUserLoggedIn: implemented auth guard and isUserLoggedIn set to true if set to 

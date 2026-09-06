@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -6,7 +5,7 @@ import { Component, Input } from '@angular/core';
     templateUrl: './childone.component.html',
     styleUrls: ['./childone.component.css'],
     standalone: true,
-    imports: [CommonModule]
+    imports: []
 })
 export class ChildoneComponent {
 

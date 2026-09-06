@@ -26,21 +26,21 @@ export class EventsComponent implements OnInit {
     })
   }
 
-  clickEvent(event: Event, a: number) {
+  clickEvent(event: Event, a: number): void {
     console.log("Event", event);
     console.log('a', a);
     this.clickData = "Click Event is triggering";
   }
 
-  doubleClick() {
+  doubleClick(): void {
     this.doubleclickdata = "Double click event is triggering";
   }
 
-  increment() {
+  increment(): void {
     this.count++;
   }
 
-  decrement() {
+  decrement(): void {
     (this.count == 0) ? alert("count cannot be less than  0") : this.count--;
   }
 

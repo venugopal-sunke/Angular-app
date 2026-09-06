@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MatSlideToggleModule, MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { UserserviceService } from '../services/userservice.service';
 import { CommonModule } from '@angular/common';
 import { MatCard, MatCardContent } from '@angular/material/card';
@@ -51,12 +51,12 @@ export class DirectivesComponent implements OnInit {
     });
   }
 
-    changed(event: MatSlideToggleModule){
+    changed(event: MatSlideToggleChange){
       this.myvisible = !this.myvisible;
       this.displayMessage = this.myvisible ? "showme" : "hideme";
     }
 
-    mytoggle(event: any){
+    mytoggle(event: MatSlideToggleChange): void {
       //console.log("failed:::",event.source["_elementRef"].nativeElement.parentNode.querySelector("p"));
       this.part = event.source["_elementRef"].nativeElement.parentNode.querySelector("p");
        if(this.part.classList.contains("showme")){
@@ -68,7 +68,7 @@ export class DirectivesComponent implements OnInit {
        }
    }
 
-   toggleAction() {
+   toggleAction(): void {
     this.visible = !this.visible;
     this.showMsg = this.visible ? "showme" : "hideme";
   }

@@ -4,6 +4,15 @@
             <h4>Signals in Angular</h4>
             <button type="button" (click)="increase()">Increase</button>
             <p>We can use signals for simple parent to child component communication.</p>
+            <p><b>Signal:</b>Signal is a way to store a value that Angular can track reactively. When that value changes, Angular knows 
+            which parts of your application depend on it and can update them automatically.</p>
+            <br>
+            <p><b>Writable Signal:</b>Stores a value that you can change using set() or update().</p>
+            <br>
+            <p><b>Effect:</b>When you create an effect() inside a constructor, you do not need to call it manually. Angular runs it automatically.
+            It runs initially and reruns when its tracked signal dependencies change.</p>
+            <br>
+            <p><b>Computed Signal:</b>A computed signal is a signal whose value is calculated from other signals.</p>
         </div>
     </div>
 </div>

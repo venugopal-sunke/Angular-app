@@ -13,14 +13,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let info of usersData" [ngClass]="getCSSClasses(info)">
-                        <!-- <td matTooltip="{{info.id}}" [matTooltipPosition]="'before'"><a
-                                [routerLink]="['/userinfo',info.id]">{{ info.id }}</a></td> -->
-                        <td matTooltip="{{info.id}}" [matTooltipPosition]="'before'"><a
-                                    (click)="userRoute(info)">{{ info.id }}</a></td>
-                        <td matTooltip="{{info.name}}" [matTooltipPosition]="'above'">{{ info.name }}</td>
-                        <td matTooltip="{{info.username}}" [matTooltipPosition]="'below'">{{ info.username }}</td>
+                    @for (info of usersData; track info.id) {
+                    <tr [ngClass]="getCSSClasses(info)">
+                        <!--
+                        <td matTooltip="{{ info.id }}" [matTooltipPosition]="'before'">
+                        <a [routerLink]="['/userinfo', info.id]">{{ info.id }}</a>
+                        </td>
+                        -->
+                        <td matTooltip="{{ info.id }}" [matTooltipPosition]="'before'">
+                        <a (click)="userRoute(info)">{{ info.id }}</a>
+                        </td>
+
+                        <td matTooltip="{{ info.name }}" [matTooltipPosition]="'above'">
+                        {{ info.name }}
+                        </td>
+
+                        <td matTooltip="{{ info.username }}" [matTooltipPosition]="'below'">
+                        {{ info.username }}
+                        </td>
                     </tr>
+                    }
                 </tbody>
             </table>
         </div>

@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpusersService } from 'src/app/services/httpusers.service';
-
 @Component({
     selector: 'app-userinfo',
     templateUrl: './userinfo.component.html',
     styleUrls: ['./userinfo.component.css'],
     standalone: true,
-    imports: [CommonModule, RouterModule]
+    imports: [RouterModule]
 })
 export class UserinfoComponent implements OnInit, OnDestroy{
 

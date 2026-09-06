@@ -4,7 +4,7 @@ import { UserPipe, comments, userInfo } from '../models/datamodel';
 import { HttpusersService } from '../services/httpusers.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UserdialogComponent } from './userdialog/userdialog.component';
-import { CommonModule } from '@angular/common';
+import { UpperCasePipe, LowerCasePipe, TitleCasePipe, CurrencyPipe, DatePipe } from '@angular/common';
 import { AgePipe } from "../custompipes/age.pipe";
 import { FormsModule } from '@angular/forms';
 import { SearchFilterPipe } from '../custompipes/search-filter.pipe';
@@ -17,15 +17,9 @@ import autoTable from 'jspdf-autotable';
     templateUrl: './angularservice.component.html',
     styleUrls: ['./angularservice.component.css'],
     standalone: true,
-    imports: [CommonModule, AgePipe, FormsModule, SearchFilterPipe, NgxPaginationModule],
+    imports: [AgePipe, FormsModule, SearchFilterPipe, NgxPaginationModule, UpperCasePipe, LowerCasePipe, TitleCasePipe, CurrencyPipe, DatePipe],
 })
 export class AngularserviceComponent implements OnInit {
-
-  // constructor(
-  //   private userService: UserserviceService,
-  //   private httpUser: HttpusersService,
-  //   public dialog: MatDialog,
-  // ){}
 
   private userService = inject(UserserviceService);
   private httpUser = inject(HttpusersService);
