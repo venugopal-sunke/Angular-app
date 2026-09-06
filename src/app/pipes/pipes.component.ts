@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { UserPipe, userInfo } from '../models/datamodel';
 import { HttpusersService } from '../services/httpusers.service';
 import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import {UpperCasePipe, TitleCasePipe, CurrencyPipe, DatePipe, PercentPipe, JsonPipe, AsyncPipe} from '@angular/common';
 import { ArraysortPipe } from '../custompipes/arraysort.pipe';
 import { AgePipe } from '../custompipes/age.pipe';
 @Component({
@@ -10,7 +10,7 @@ import { AgePipe } from '../custompipes/age.pipe';
     templateUrl: './pipes.component.html',
     styleUrls: ['./pipes.component.css'],
     standalone: true,
-    imports: [CommonModule, ArraysortPipe, AgePipe]
+    imports: [ArraysortPipe, AgePipe, UpperCasePipe, TitleCasePipe, CurrencyPipe, DatePipe, PercentPipe, JsonPipe, AsyncPipe]
 })
 export class PipesComponent implements OnInit{
 

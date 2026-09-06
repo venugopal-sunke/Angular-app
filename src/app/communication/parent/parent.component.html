@@ -14,18 +14,20 @@
     </div>
 
     <h2>Implemented ng-content from parent to child communication</h2>
-    <div class="row" *ngFor="let session of contentData">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        
-        <div class="well hoverwell thumbnail">
-          <app-childone [title]="session">
-            <span>Duration: {{ session.date }}</span><br>
-            <span>Level: {{ session.time }}</span>
-          </app-childone>
-        </div>
+     @for (session of contentData; track $index) {
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-      </div>
-    </div>
+            <div class="well hoverwell thumbnail">
+              <app-childone [title]="session">
+                <span>Duration: {{ session.date }}</span><br>
+                <span>Level: {{ session.time }}</span>
+              </app-childone>
+            </div>
+
+          </div>
+        </div>
+      }
 
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -36,14 +38,16 @@
           <button type="button" [class.stateActive]="selectedIndex === 'beginner'" (click)="myFunc($event,'beginner')">Beginner</button>
         </div>
 
-        <div *ngIf="myData.length > 0">
-          <ul *ngFor="let data of myData">
-            <!-- <li>{{data?.id}}</li>
-            <li>{{data?.name}}</li>
-            <li>{{data?.presenter}}</li> -->
-            <li><b>{{data?.level}}</b></li>
+        @if (myData.length > 0) {
+          <ul>
+            @for (data of myData; track $index) {
+              <!-- <li>{{ data?.id }}</li>
+              <li>{{ data?.name }}</li>
+              <li>{{ data?.presenter }}</li> -->
+              <li><b>{{ data?.level }}</b></li>
+            }
           </ul>
-        </div>
+        }
       </div>
     </div>
 

@@ -8,6 +8,8 @@
 <div (click)="toggleContent()">
     <h4>{{ title.name }}</h4>
     <div class="mycontent" id="{{ title.id }}">
-      <ng-content *ngIf="visible"></ng-content>
+      @if (visible) {
+      <ng-content></ng-content>
+    }
     </div>
 </div>

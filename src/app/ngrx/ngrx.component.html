@@ -7,9 +7,11 @@
             <h4><strong>Implementing Effects in Ngrx</strong></h4>
             
             <ul>
-            <li *ngFor="let user of mydata; trackBy: trackByUserId">
-            {{ user.username }} :: {{ user.id }}
+            @for (user of mydata; track user.id) {
+            <li>
+                {{ user.username }} :: {{ user.id }}
             </li>
+            }
           </ul>
         </div>
     </div>
